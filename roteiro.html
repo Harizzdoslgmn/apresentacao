@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Roteiro de apresentação — Condiloma e Cancro Mole</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: roteiro para segurar na mao — coluna unica, numero da cena na margem,
+   tempo a direita, falas em corpo grande o suficiente para ler de relance. */
+:root{
+  --ink:#1a1014; --ink-2:#4a3a40; --ink-3:#8a747c;
+  --blood:#a8102c;
+  --rule:#e4d8dc; --wash:#fdf7f8;
+  --display:"Archivo","TeX Gyre Heros Cn","Arial Narrow",Helvetica,sans-serif;
+  --body:"IBM Plex Sans","Inter",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#fff;font-size:11pt;line-height:1.5}
+.wrap{max-width:185mm;margin:0 auto;padding:0 6mm}
+
+.capa{border-bottom:2.5px solid var(--blood);padding-bottom:9mm;margin-bottom:8mm}
+.eyebrow{font-family:var(--mono);font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--blood);margin:0 0 4mm}
+h1{font-family:var(--display);font-variation-settings:"wdth" 115,"wght" 800;text-transform:uppercase;
+  font-size:26pt;line-height:.95;letter-spacing:-.015em;margin:0 0 4mm}
+.sub{color:var(--ink-2);font-size:11pt;margin:0 0 6mm;max-width:62ch}
+.meta{display:flex;gap:9mm;flex-wrap:wrap;font-family:var(--mono);font-size:8pt;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.meta b{display:block;font-family:var(--display);font-variation-settings:"wdth" 108,"wght" 700;
+  font-size:15pt;color:var(--blood);letter-spacing:0;text-transform:none;margin-bottom:1mm}
+
+.antes{background:var(--wash);border:1px solid var(--rule);border-left:3px solid var(--blood);
+  padding:6mm 7mm;margin-bottom:9mm;break-inside:avoid}
+.antes h3{font-family:var(--mono);font-size:8pt;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blood);margin:0 0 4mm;font-weight:500}
+.antes ol{margin:0;padding-left:5mm}
+.antes li{margin-bottom:2.5mm;color:var(--ink-2)}
+.antes li b{color:var(--ink)}
+.antes .keys{margin-top:5mm;padding-top:4mm;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:8.5pt;color:var(--ink-2);line-height:1.9}
+.antes .keys kbd{font-family:var(--mono);background:#fff;border:1px solid var(--rule);
+  border-bottom-width:2px;border-radius:3px;padding:.5mm 1.8mm;font-size:8pt;color:var(--ink)}
+
+.cena{break-inside:avoid;page-break-inside:avoid;margin-bottom:7mm;padding-bottom:6mm;border-bottom:1px solid var(--rule)}
+.cena:last-child{border-bottom:0}
+.cena header{display:flex;gap:5mm;align-items:flex-start;margin-bottom:4mm}
+.n{font-family:var(--display);font-variation-settings:"wdth" 112,"wght" 800;font-size:20pt;line-height:.9;
+  color:var(--blood);min-width:13mm;font-variant-numeric:tabular-nums}
+.id{flex:1 1 auto;min-width:0}
+.id h2{font-family:var(--display);font-variation-settings:"wdth" 108,"wght" 700;text-transform:uppercase;
+  font-size:12.5pt;letter-spacing:.01em;margin:0 0 1.5mm;line-height:1.1}
+.tela{font-size:9pt;color:var(--ink-3);margin:0;line-height:1.4}
+.scale{font-family:var(--mono);font-size:7.5pt;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);white-space:nowrap}
+.t{text-align:right;font-family:var(--mono);font-size:7.5pt;color:var(--ink-3);
+  letter-spacing:.06em;min-width:22mm}
+.t b{display:block;font-family:var(--display);font-variation-settings:"wdth" 106,"wght" 700;
+  font-size:13pt;color:var(--ink);letter-spacing:0;font-variant-numeric:tabular-nums}
+.falas p{margin:0 0 3mm;font-size:11pt;line-height:1.58;max-width:68ch;color:var(--ink)}
+.falas p:last-child{margin:0}
+.falas p::before{content:"";display:inline-block;width:1.7mm;height:1.7mm;border-radius:50%;
+  background:var(--blood);vertical-align:.35em;margin-right:3mm}
+
+.fim{margin-top:9mm;padding-top:6mm;border-top:2.5px solid var(--blood);break-inside:avoid}
+.fim h3{font-family:var(--mono);font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:var(--blood);margin:0 0 4mm}
+.fim p{font-size:9pt;color:var(--ink-2);line-height:1.7;margin:0 0 2mm;max-width:70ch}
+.fim b{color:var(--ink)}
+
+@page{size:A4;margin:14mm 10mm 13mm}
+@media print{ body{font-size:10.5pt} a{color:inherit;text-decoration:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="capa">
+    <p class="eyebrow">Roteiro de apresentação · Biologia</p>
+    <h1>Condiloma acuminado<br>e cancro mole</h1>
+    <p class="sub">Falas cena por cena, na ordem da apresentação. O tempo de cada cena foi calculado
+    sobre o próprio texto, num ritmo de fala calmo.</p>
+    <div class="meta">
+      <div><b>18</b> cenas</div>
+      <div><b>13:20</b> de fala</div>
+      <div><b>1632</b> palavras</div>
+    </div>
+  </div>
+
+  <div class="antes">
+    <h3>Antes de começar</h3>
+    <ol>
+      <li><b>Abra a apresentação</b> no navegador e aperte <b>F</b> para tela cheia. Em tela cheia
+          some tudo menos as duas setas de avançar, para a turma não ver os controles.
+          <b>Esc</b> ou <b>F</b> de novo sai.</li>
+      <li><b>Se houver duas telas</b> (notebook + projetor em modo estendido): clique em
+          <b>Apresentador</b>. Abre uma segunda janela com estas falas, o cronômetro e os
+          controles. Arraste essa janela para a tela do notebook e deixe a apresentação no projetor.
+          As duas andam juntas sozinhas.</li>
+      <li><b>Se a tela estiver espelhada</b> (o projetor repete o notebook), não use o painel:
+          a plateia veria as falas. Use este papel.</li>
+      <li><b>Avance</b> com a seta direita ou a barra de espaço. A barrinha embaixo leva a
+          qualquer cena, caso passe direto.</li>
+      <li><b>Abertura sugerida:</b> avise que não há nenhuma foto de lesão na apresentação e que o
+          foco é a biologia. Isso acalma a turma nos primeiros segundos.</li>
+    </ol>
+    <div class="keys">
+      <kbd>→</kbd> ou <kbd>espaço</kbd> avança &nbsp;·&nbsp; <kbd>←</kbd> volta &nbsp;·&nbsp;
+      <kbd>F</kbd> tela cheia &nbsp;·&nbsp; <kbd>P</kbd> janela do apresentador &nbsp;·&nbsp;
+      <kbd>N</kbd> falas nesta mesma tela &nbsp;·&nbsp; <kbd>Esc</kbd> fecha as falas<br>
+      No painel do apresentador: <kbd>T</kbd> inicia ou pausa o cronômetro &nbsp;·&nbsp; <kbd>R</kbd> zera
+    </div>
+  </div>
+
+
+  <article class="cena">
+    <header>
+      <span class="n">01</span>
+      <div class="id">
+        <h2>Abertura</h2>
+        <p class="tela">Na tela: O mundo invisível <span class="scale">escala 1 m</span></p>
+      </div>
+      <div class="t"><b>0:35</b><span>acum. 0:35</span></div>
+    </header>
+    <div class="falas"><p>Olá, pessoal. Antes de começar, um aviso: nada do que vocês vão ver aqui é foto. É tudo ilustração científica, porque o que importa hoje não é a aparência da lesão — é entender o que está acontecendo lá dentro.</p><p>Vamos falar de duas Infecções Sexualmente Transmissíveis muito diferentes entre si: o condiloma acuminado, causado por um vírus, e o cancro mole, causado por uma bactéria. Duas escalas, dois comportamentos, dois tratamentos.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">02</span>
+      <div class="id">
+        <h2>O que é uma IST</h2>
+        <p class="tela">Na tela: Infecção não é a mesma coisa que doença <span class="scale">escala 1 m</span></p>
+      </div>
+      <div class="t"><b>0:35</b><span>acum. 1:10</span></div>
+    </header>
+    <div class="falas"><p>IST significa Infecção Sexualmente Transmissível. A sigla antiga era DST, de doença. A troca aconteceu em 2016 e não é detalhe: muita gente está infectada e transmite sem ter nenhum sintoma. Existe infecção sem doença aparente.</p><p>Isso explica por que as duas ISTs de hoje se comportam de formas tão diferentes. O cancro mole dá sintoma em poucos dias e dói muito. O HPV pode ficar meses em silêncio.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">03</span>
+      <div class="id">
+        <h2>Aproximação</h2>
+        <p class="tela">Na tela: Sete ordens de grandeza para baixo <span class="scale">escala 1 m → 55 nm</span></p>
+      </div>
+      <div class="t"><b>0:35</b><span>acum. 1:45</span></div>
+    </header>
+    <div class="falas"><p>Para entender o resto da apresentação, precisamos combinar as escalas. Esta régua é logarítmica: cada passo é dez vezes menor que o anterior.</p><p>Partindo do corpo inteiro, descemos até a lesão que se vê a olho nu, depois até a célula da pele, depois até a bactéria e, por último, até o vírus. Do começo ao fim dessa régua são sete ordens de grandeza.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">04</span>
+      <div class="id">
+        <h2>HPV · o agente</h2>
+        <p class="tela">Na tela: HPV: uma cápsula de proteína com DNA dentro <span class="scale">escala 55 nm</span></p>
+      </div>
+      <div class="t"><b>0:50</b><span>acum. 2:35</span></div>
+    </header>
+    <div class="falas"><p>Este é o HPV, o Papilomavírus humano. Ele é minúsculo: cinquenta e cinco nanômetros, mais de mil vezes menor que a espessura de um fio de cabelo.</p><p>Repare em três coisas. Primeiro: o material genético é DNA de dupla fita, circular. Segundo: a casca é um capsídeo icosaédrico feito de setenta e dois capsômeros da proteína L1. Terceiro, e mais importante: ele não tem envelope de gordura, e por isso resiste bem no ambiente.</p><p>Existem mais de duzentos tipos de HPV. Guardem dois números: seis e onze causam cerca de noventa por cento das verrugas genitais. Dezesseis e dezoito são os de alto risco, ligados ao câncer.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">05</span>
+      <div class="id">
+        <h2>Condiloma · transmissão</h2>
+        <p class="tela">Na tela: Como o vírus vira verruga <span class="scale">escala 100 µm</span></p>
+      </div>
+      <div class="t"><b>0:45</b><span>acum. 3:20</span></div>
+    </header>
+    <div class="falas"><p>Agora o mecanismo. O HPV entra por microfissuras e vai direto para a camada basal do epitélio, a camada mais profunda, onde ficam as células que se dividem.</p><p>Ele sequestra a maquinaria dessa célula. Conforme a célula infectada amadurece e sobe para a superfície, o vírus se multiplica junto. O resultado dessa proliferação exagerada é a verruga.</p><p>Uma observação importante: o período de incubação é longo e variável. Em média cerca de três meses, mas pode levar anos. Por isso quase nunca dá para dizer quando ou de quem a pessoa pegou.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">06</span>
+      <div class="id">
+        <h2>Condiloma · sinais</h2>
+        <p class="tela">Na tela: Sinais e sintomas <span class="scale">escala 5 mm</span></p>
+      </div>
+      <div class="t"><b>0:45</b><span>acum. 4:05</span></div>
+    </header>
+    <div class="falas"><p>Esta é a aparência clássica: verrugas moles, da cor da pele ou rosadas, com superfície irregular. Quando se agrupam, formam o aspecto de couve-flor, que é como o condiloma aparece nos livros.</p><p>A característica que mais ajuda no diagnóstico é esta: em geral são indolores. Podem coçar ou sangrar se forem traumatizadas, mas não doem. Guardem isso, porque daqui a pouco vamos ver uma lesão que dói muito.</p><p>E o dado mais importante do slide: a maioria absoluta das infecções por HPV é assintomática e o próprio sistema imune resolve sozinho em um a dois anos.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">07</span>
+      <div class="id">
+        <h2>Condiloma · diagnóstico</h2>
+        <p class="tela">Na tela: Como se faz o diagnóstico <span class="scale">escala 5 mm</span></p>
+      </div>
+      <div class="t"><b>0:45</b><span>acum. 4:50</span></div>
+    </header>
+    <div class="falas"><p>O diagnóstico do condiloma é clínico: o profissional reconhece pela aparência. Biópsia só em caso de dúvida, lesão que não melhora ou suspeita de malignidade.</p><p>Um ponto que costuma confundir: não se pede teste de DNA de HPV para diagnosticar verruga. O resultado não mudaria a conduta. O teste de HPV e o Papanicolau servem para outra coisa, que é o rastreio do câncer do colo do útero.</p><p>E a regra de ouro: quem tem uma IST pode ter outra. Sempre se oferece testagem para sífilis, HIV e hepatites B e C.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">08</span>
+      <div class="id">
+        <h2>Condiloma · tratamento</h2>
+        <p class="tela">Na tela: Tratamento <span class="scale">escala 5 mm</span></p>
+      </div>
+      <div class="t"><b>0:45</b><span>acum. 5:35</span></div>
+    </header>
+    <div class="falas"><p>Aqui está a ideia central deste slide, e eu peço atenção: o tratamento destrói a lesão, não elimina o vírus do corpo. Por isso a recidiva é comum e não significa que a pessoa se reinfectou.</p><p>Existem dois grupos. Os autoaplicados em casa, que são a podofilotoxina e o imiquimode. E os aplicados no serviço de saúde: o ácido tricloroacético, a crioterapia com nitrogênio líquido, a eletrocauterização e a retirada cirúrgica.</p><p>A escolha depende do tamanho, do número e do local das lesões. Na gestação, podofilotoxina e imiquimode são proibidos; o ácido tricloroacético pode ser usado.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">09</span>
+      <div class="id">
+        <h2>Condiloma · prevenção</h2>
+        <p class="tela">Na tela: Prevenção: a vacina muda o jogo </p>
+      </div>
+      <div class="t"><b>0:55</b><span>acum. 6:30</span></div>
+    </header>
+    <div class="falas"><p>A prevenção do HPV tem uma arma que as outras ISTs não têm: vacina. É a quadrivalente, que protege contra os tipos seis, onze, dezesseis e dezoito. Está disponível de graça no SUS.</p><p>Desde dois mil e vinte e quatro, seguindo a recomendação da Organização Mundial da Saúde, o esquema de rotina é de dose única para meninas e meninos de nove a quatorze anos. Quem tem até dezenove anos e nunca se vacinou também pode tomar.</p><p>Agora o ponto delicado: a camisinha reduz muito o risco, mas a proteção contra o HPV é parcial, porque o vírus está na pele de áreas que o preservativo não cobre. Reduz muito, não zera.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">10</span>
+      <div class="id">
+        <h2>Vírus × bactéria</h2>
+        <p class="tela">Na tela: Por que um tem cura com antibiótico e o outro não <span class="scale">escala 55 nm × 1,5 µm</span></p>
+      </div>
+      <div class="t"><b>0:50</b><span>acum. 7:20</span></div>
+    </header>
+    <div class="falas"><p>Vamos mudar de reino. Até agora falamos de um vírus. Agora vamos falar de uma bactéria, e essa diferença explica quase tudo o que vem a seguir.</p><p>O vírus não é uma célula. Não tem metabolismo próprio, não come, não se divide sozinho. Ele é um pacote de material genético dentro de uma casca de proteína, e precisa invadir uma célula viva para existir. Por isso não adianta antibiótico contra HPV.</p><p>A bactéria é uma célula completa, procarionte. Tem membrana, parede celular, ribossomos e DNA próprio, e se divide sozinha. É por isso que o cancro mole tem cura com antibiótico e o condiloma não.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">11</span>
+      <div class="id">
+        <h2>H. ducreyi · o agente</h2>
+        <p class="tela">Na tela: Haemophilus ducreyi <span class="scale">escala 1,5 µm</span></p>
+      </div>
+      <div class="t"><b>0:50</b><span>acum. 8:10</span></div>
+    </header>
+    <div class="falas"><p>Apresento a vocês o Haemophilus ducreyi, o agente do cancro mole, também chamado de cancroide e popularmente de cavalo.</p><p>Um detalhe que vale explicar: ele é um cocobacilo gram-negativo. No método de coloração de Gram, as bactérias gram-negativas ficam rosa-avermelhadas, e as gram-positivas ficam roxo-azuladas. Essa cor da nossa apresentação não é escolha estética: é literalmente a cor que essa bactéria assume na lâmina.</p><p>Ela é imóvel, não tem flagelo, e é fastidiosa, ou seja, muito difícil de cultivar no laboratório. Ao microscópio, as bactérias se alinham em fileiras paralelas, o que os livros chamam de cardume de peixes ou trilhos de trem.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">12</span>
+      <div class="id">
+        <h2>Cancro mole · sinais</h2>
+        <p class="tela">Na tela: Rápido, múltiplo e muito doloroso <span class="scale">escala 10 mm</span></p>
+      </div>
+      <div class="t"><b>0:50</b><span>acum. 9:00</span></div>
+    </header>
+    <div class="falas"><p>O cancro mole é o oposto do condiloma em quase tudo. A incubação é curtíssima: três a cinco dias. A lesão começa como uma pápula, vira pústula e se rompe formando uma úlcera.</p><p>Guardem as cinco características da úlcera: múltiplas, muito dolorosas, bordas irregulares e solapadas, fundo sujo com pus, e base mole. É dessa base mole que vem o nome da doença.</p><p>Como o conteúdo da úlcera é cheio de bactéria, acontece a autoinoculação: surgem lesões em espelho nas superfícies que se tocam. E em um terço a metade dos casos aparece o bubão, uma íngua inguinal dolorosa que pode se romper por um único orifício.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">13</span>
+      <div class="id">
+        <h2>Úlceras · diferencial</h2>
+        <p class="tela">Na tela: Cancro mole × cancro duro <span class="scale">escala 10 mm</span></p>
+      </div>
+      <div class="t"><b>0:45</b><span>acum. 9:45</span></div>
+    </header>
+    <div class="falas"><p>Esta tabela é a parte mais cobrada em prova e a mais útil na vida real. Toda úlcera genital levanta duas hipóteses principais: cancro mole e sífilis primária, que é o cancro duro.</p><p>A regra prática para decorar é simples. Cancro mole: múltiplas, dolorosas, fundo sujo, base mole. Cancro duro: única, indolor, fundo limpo, base endurecida. Mole dói, duro não dói.</p><p>E ainda existe o cancro misto de Rollet, quando as duas infecções acontecem juntas na mesma pessoa. Por isso nunca se trata uma úlcera genital sem testar para sífilis.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">14</span>
+      <div class="id">
+        <h2>Cancro mole · tratamento</h2>
+        <p class="tela">Na tela: Diagnóstico e tratamento </p>
+      </div>
+      <div class="t"><b>0:55</b><span>acum. 10:40</span></div>
+    </header>
+    <div class="falas"><p>O diagnóstico é essencialmente clínico, afastando sífilis e herpes. Pode-se fazer o Gram da secreção. A cultura é difícil porque a bactéria é fastidiosa, e o PCR é o mais sensível mas pouco disponível na rede.</p><p>O tratamento recomendado pelo Ministério da Saúde é azitromicina um grama por via oral em dose única. A alternativa é ceftriaxona quinhentos miligramas intramuscular, também em dose única. Uma dose e acabou.</p><p>Três detalhes práticos: tratar as parcerias sexuais dos últimos dez dias mesmo sem sintomas; se o bubão estiver flutuante, aspirar com agulha e nunca cortar, porque a incisão atrasa a cicatrização; e este é o grande contraste com o HPV — aqui tem cura completa.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">15</span>
+      <div class="id">
+        <h2>Comparativo</h2>
+        <p class="tela">Na tela: Lado a lado </p>
+      </div>
+      <div class="t"><b>0:35</b><span>acum. 11:15</span></div>
+    </header>
+    <div class="falas"><p>Vamos juntar tudo. Esta tabela é o resumo da apresentação inteira — se vocês guardarem só um slide, guardem este.</p><p>Vírus contra bactéria. Incubação de meses contra incubação de dias. Verruga indolor contra úlcera dolorida. Sem cura definitiva contra cura com uma dose. E, na prevenção, o HPV tem vacina; o cancro mole não tem, mas o preservativo o bloqueia muito bem.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">16</span>
+      <div class="id">
+        <h2>Prevenção</h2>
+        <p class="tela">Na tela: O que realmente funciona </p>
+      </div>
+      <div class="t"><b>0:50</b><span>acum. 12:05</span></div>
+    </header>
+    <div class="falas"><p>A parte prática. Camisinha em todas as relações, incluindo sexo oral e anal. Vacina de HPV na idade indicada, de graça no posto. Testagem regular, porque muita IST não dá sintoma.</p><p>Duas coisas que costumam falhar: tratar a parceria e não se automedicar. Não adianta tratar só uma pessoa, porque a reinfecção é imediata. E nunca passar pomada, creme ou receita caseira numa lesão genital — isso mascara o quadro e atrasa o diagnóstico.</p><p>Por fim: no SUS o atendimento para IST é gratuito, e o sigilo é parte do atendimento. Adolescente pode ser atendido sem estar acompanhado.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">17</span>
+      <div class="id">
+        <h2>Mitos</h2>
+        <p class="tela">Na tela: Cinco frases que você já ouviu </p>
+      </div>
+      <div class="t"><b>0:40</b><span>acum. 12:45</span></div>
+    </header>
+    <div class="falas"><p>Separei as cinco frases que mais se ouvem por aí, para derrubar uma por uma.</p><p>Vou destacar duas. A do vaso sanitário: não transmite. O HPV precisa de contato direto pele a pele, e o Haemophilus ducreyi precisa de contato com a secreção da úlcera durante o sexo.</p><p>E a da vacina: tomar a vacina do HPV não dispensa a camisinha. A vacina cobre quatro tipos de um único vírus. Ela não protege contra sífilis, gonorreia, HIV, clamídia nem contra o cancro mole.</p></div>
+  </article>
+  <article class="cena">
+    <header>
+      <span class="n">18</span>
+      <div class="id">
+        <h2>Fechamento</h2>
+        <p class="tela">Na tela: Três ideias para levar </p>
+      </div>
+      <div class="t"><b>0:35</b><span>acum. 13:20</span></div>
+    </header>
+    <div class="falas"><p>Para encerrar, três ideias.</p><p>Primeira: o agente define tudo. Vírus e bactéria exigem abordagens completamente diferentes, e é por isso que antibiótico não resolve condiloma.</p><p>Segunda: o silêncio é o maior risco. A maior parte das infecções por HPV não dá sintoma, e é assim que a transmissão continua.</p><p>Terceira: as duas são evitáveis. Camisinha, vacina, testagem e tratamento da parceria. Obrigada — e se alguém tiver dúvida, podemos conversar agora.</p></div>
+  </article>
+
+  <div class="fim">
+    <h3>Se perguntarem</h3>
+    <p><b>“Tem cura?”</b> &nbsp;Cancro mole: sim, uma dose de antibiótico. HPV: o tratamento remove a
+    lesão, e na maioria das pessoas o próprio sistema imune elimina o vírus em um a dois anos — mas
+    não existe remédio que elimine o vírus.</p>
+    <p><b>“Homem também toma a vacina?”</b> &nbsp;Sim. Meninos de 9 a 14 anos, dose única, no SUS.</p>
+    <p><b>“Quem já tem HPV deve se vacinar?”</b> &nbsp;A vacina é preventiva e não trata lesão existente,
+    mas pode proteger contra os outros tipos que a pessoa ainda não pegou. Quem decide é o profissional de saúde.</p>
+    <p><b>“Dá para pegar sem penetração?”</b> &nbsp;HPV, sim: basta contato direto de pele e mucosa.
+    Cancro mole precisa de contato com a secreção da úlcera.</p>
+    <p><b>“Por que a apresentação é vermelha?”</b> &nbsp;Porque o <i>Haemophilus ducreyi</i> é gram-negativo
+    e cora em rosa-avermelhado na lâmina. A paleta é a cor real da bactéria no microscópio.</p>
+
+    <h3 style="margin-top:7mm">Fontes</h3>
+    <p>Ministério da Saúde — <b>Protocolo Clínico e Diretrizes Terapêuticas para Atenção Integral às
+    Pessoas com IST (PCDT-IST)</b>.<br>
+    Ministério da Saúde / Programa Nacional de Imunizações — <b>Nota Informativa da vacina HPV
+    quadrivalente</b>, esquema de dose única (2024).<br>
+    OMS e OPAS — recomendação de dose única da vacina HPV.<br>
+    CONITEC — incorporação de podofilotoxina e imiquimode para verrugas anogenitais no SUS.<br>
+    Decreto nº 8.901/2016 — troca da nomenclatura DST para IST.</p>
+  </div>
+
+</div>
+</body>
+</html>

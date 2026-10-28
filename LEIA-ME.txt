@@ -1,0 +1,54 @@
+APRESENTAÇÃO DE BIOLOGIA — CONDILOMA ACUMINADO E CANCRO MOLE
+============================================================
+
+O QUE TEM NESTE PACOTE
+----------------------
+index.html                 A apresentação. É o arquivo principal.
+apresentador.html          A janela do apresentador (falas + cronômetro + controles).
+roteiro-apresentacao.pdf   O roteiro para imprimir ou abrir no celular.
+roteiro.html               O mesmo roteiro em página, caso queira imprimir do navegador.
+
+
+COMO SUBIR NA HOSPEDAGEM
+------------------------
+1. Entre no painel da hospedagem e abra o gerenciador de arquivos (ou um cliente FTP).
+2. Entre na pasta pública do site. Dependendo do painel ela se chama
+   public_html, www ou htdocs.
+3. Envie os arquivos deste pacote para dentro dessa pasta, SEM criar subpasta e
+   SEM mudar os nomes.
+4. Pronto: abrir o endereço do site já carrega a apresentação, porque o arquivo
+   se chama index.html.
+
+Importante: index.html e apresentador.html precisam ficar na MESMA pasta, senão
+o botão "Apresentador" não encontra a segunda janela.
+
+
+COMO USAR SEM INTERNET
+----------------------
+Copie a pasta inteira para um pen drive e dê dois cliques em index.html.
+Funciona igual, inclusive o modo apresentador. A única diferença é a fonte das
+letras, que muda para a fonte do computador quando não há internet.
+
+
+DURANTE A APRESENTAÇÃO
+----------------------
+Seta direita ou barra de espaço .... avança
+Seta esquerda ...................... volta
+F .................................. tela cheia (some tudo menos as setas)
+P .................................. abre a janela do apresentador
+N .................................. mostra as falas nesta mesma tela
+Esc ................................ fecha as falas / sai da tela cheia
+
+Em tela cheia a barra de cima, a barra de cenas e os outros botões somem, para
+a turma não ver os controles. Ficam só as duas setas, no canto inferior direito.
+Para sair, Esc ou F de novo.
+
+Com duas telas (notebook + projetor em modo estendido):
+  aperte P, arraste a janela que abrir para a tela do notebook e deixe a
+  apresentação no projetor. As duas andam juntas sozinhas.
+
+Com a tela espelhada (o projetor repete o notebook):
+  não use o painel, porque a turma veria as falas. Use o roteiro em PDF.
+
+
+Tempo de fala: 13 minutos e 20 segundos, em ritmo calmo. 18 cenas.

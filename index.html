@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Apresentacao de Biologia sobre condiloma acuminado e cancro mole, duas Infeccoes Sexualmente Transmissiveis.">
+<style>
+/* reset equivalente ao que o visualizador de artifacts injeta, aqui explicito */
+:root{
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+img{max-width:100%}
+[hidden]{display:none !important}
+</style>
+<title>Condiloma e Cancro Mole</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap">
+<style>
+/* Layout: palco escuro de instrumento científico — HUD fixo nas bordas, cenas empilhadas que
+   atravessam por zoom, conteúdo em duas trilhas (texto / ilustração) que vira coluna única no celular. */
+:root{
+  --void:#06030a;
+  --wine:#1c0510;
+  --wine-2:#340a1d;
+  --blood:#b0102f;
+  --neon:#ff1f4f;
+  --rose:#ff7d9a;
+  --spark:#ff4d6d;
+  --ink:#fff0f3;
+  --ink-2:#e8bcc7;
+  --ink-3:#b98b98;
+  --line:rgba(255,120,150,.20);
+  --line-2:rgba(255,120,150,.40);
+  --glass:rgba(32,6,16,.62);
+  --display:"Archivo","Arial Narrow","Helvetica Neue",Helvetica,system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",monospace;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--body);font-weight:300;overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--void)}
+
+/* ---------- fundos ---------- */
+.backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.nebula{position:absolute;border-radius:50%;filter:blur(80px);opacity:.75}
+.nebula.a{width:72vmax;height:72vmax;left:-26vmax;top:-30vmax;background:radial-gradient(circle,var(--wine-2) 0%,rgba(52,10,29,.22) 46%,transparent 70%)}
+.nebula.b{width:58vmax;height:58vmax;right:-22vmax;bottom:-26vmax;background:radial-gradient(circle,rgba(176,16,47,.34) 0%,rgba(176,16,47,.08) 48%,transparent 72%)}
+.nebula.c{width:40vmax;height:40vmax;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,31,79,.14) 0%,transparent 66%)}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,transparent 34%,rgba(4,2,6,.72) 86%,#030105 100%)}
+.grain{position:absolute;inset:-50%;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* partículas — cada uma é um elemento próprio, com suas variáveis */
+.particles{position:absolute;inset:0}
+.particle{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;
+  background:var(--pc,var(--spark));box-shadow:0 0 calc(var(--s) * 3) var(--pc,var(--spark));
+  opacity:var(--o,.5);will-change:transform,opacity;
+  animation:float var(--dur,18s) ease-in-out var(--delay,0s) infinite alternate, pulse calc(var(--dur,18s)/3) ease-in-out var(--delay,0s) infinite}
+@keyframes float{from{transform:translate3d(0,0,0)}to{transform:translate3d(var(--dx,20px),var(--dy,-40px),0)}}
+@keyframes pulse{0%,100%{opacity:var(--o,.5)}50%{opacity:calc(var(--o,.5) * .25)}}
+
+/* anéis de instrumento */
+.rings{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(150vmin,1500px);height:min(150vmin,1500px);opacity:.5}
+.ring{position:absolute;inset:0;margin:auto;border-radius:50%;border:1px solid var(--line)}
+.ring.r1{width:34%;height:34%;animation:spin 46s linear infinite}
+.ring.r2{width:56%;height:56%;border-style:dashed;border-color:rgba(255,120,150,.14);animation:spin 92s linear infinite reverse}
+.ring.r3{width:80%;height:80%;border-color:rgba(255,120,150,.09)}
+.ring.r1::after{content:"";position:absolute;top:-3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--neon);box-shadow:0 0 12px var(--neon)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- HUD ---------- */
+.hud{position:fixed;z-index:40;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.hud-top{top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:space-between;gap:12px;
+  padding-block:14px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.hud-chapter{color:var(--rose)}
+.hud-chapter b{color:var(--ink);font-weight:500}
+.hud-scale{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.hud-scale i{display:inline-block;width:26px;height:1px;background:var(--line-2);position:relative;font-style:normal}
+.hud-scale i::before,.hud-scale i::after{content:"";position:absolute;top:-3px;width:1px;height:7px;background:var(--line-2)}
+.hud-scale i::before{left:0}.hud-scale i::after{right:0}
+
+.rail{position:fixed;z-index:55;bottom:env(safe-area-inset-bottom,0px);left:0;right:0;
+  padding-block:14px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:14px}
+.dots{display:flex;gap:5px;flex:1;min-width:0;flex-wrap:wrap}
+.dot{width:16px;height:3px;border:0;padding:0;border-radius:2px;background:rgba(255,125,154,.22);cursor:pointer;transition:background .3s,transform .3s;flex:0 0 auto}
+.dot:hover{background:var(--rose)}
+.dot.on{background:var(--neon);box-shadow:0 0 10px var(--neon);transform:scaleY(1.6)}
+.dot:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.nav{display:flex;gap:7px;flex:0 0 auto}
+.btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--glass);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;
+  padding:7px 13px;cursor:pointer;backdrop-filter:blur(8px);transition:border-color .25s,color .25s,background .25s}
+.btn:hover{border-color:var(--neon);color:var(--ink);background:rgba(176,16,47,.2)}
+.btn:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+.btn.on{border-color:var(--neon);color:var(--neon)}
+
+/* ---------- palco e cenas ---------- */
+.stage{position:fixed;inset:0;z-index:10}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(.86);filter:blur(16px);
+  transition:opacity .66s ease,transform .92s cubic-bezier(.22,.85,.2,1),filter .66s ease;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.scene.is-active{opacity:1;visibility:visible;transform:scale(1);filter:blur(0)}
+.scene.exit-fwd{opacity:0;visibility:visible;transform:scale(1.38);filter:blur(26px)}
+.scene.exit-back{opacity:0;visibility:visible;transform:scale(.68);filter:blur(26px)}
+.inner{width:100%;max-width:1180px;max-height:100%;overflow-y:auto;overscroll-behavior:contain;
+  padding-block:clamp(74px,12vh,104px);
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.inner::-webkit-scrollbar{width:4px}
+.inner::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
+
+.layer{opacity:1}
+.scene.is-active .layer{animation:rise .85s cubic-bezier(.2,.78,.22,1) both;animation-delay:calc(var(--d,0) * 1ms)}
+@keyframes rise{from{opacity:0;transform:translateY(24px) scale(.986);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+
+/* ---------- tipografia ---------- */
+.eyebrow{font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--neon);margin:0 0 18px}
+h1{font-family:var(--display);font-variation-settings:"wdth" 118,"wght" 800;
+  font-size:clamp(2.6rem,8.4vw,6.4rem);line-height:.92;letter-spacing:-.025em;margin:0;text-wrap:balance;
+  text-transform:uppercase;color:var(--ink);text-shadow:0 0 54px rgba(255,31,79,.42)}
+h2{font-family:var(--display);font-variation-settings:"wdth" 112,"wght" 700;
+  font-size:clamp(1.75rem,4.4vw,3.1rem);line-height:1.02;letter-spacing:-.018em;margin:0 0 20px;text-wrap:balance;
+  text-transform:uppercase;color:var(--ink);text-shadow:0 0 38px rgba(255,31,79,.3)}
+h3{font-family:var(--display);font-variation-settings:"wdth" 104,"wght" 650;
+  font-size:1.02rem;letter-spacing:.03em;text-transform:uppercase;margin:0 0 9px;color:var(--rose)}
+p{margin:0 0 15px;font-size:clamp(.97rem,1.45vw,1.1rem);line-height:1.62;color:var(--ink-2);max-width:62ch}
+.lede{font-size:clamp(1.05rem,1.9vw,1.32rem);color:var(--ink);line-height:1.52;font-weight:300}
+strong{color:var(--ink);font-weight:500}
+em{font-style:italic;color:var(--rose);font-weight:400}
+.sci{font-style:italic}
+
+.grid2{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(26px,4.6vw,60px);align-items:center}
+.grid2.flip{grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr)}
+.col{min-width:0}
+
+ul.list{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:11px}
+ul.list li{position:relative;padding-left:22px;font-size:clamp(.94rem,1.38vw,1.05rem);line-height:1.56;color:var(--ink-2);max-width:60ch}
+ul.list li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;
+  background:var(--neon);box-shadow:0 0 9px var(--neon)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
+.card{border:1px solid var(--line);border-radius:3px;padding:17px 18px;background:linear-gradient(160deg,rgba(52,10,29,.52),rgba(12,3,8,.42));min-width:0}
+.card p{margin:0;font-size:.92rem;line-height:1.52;color:var(--ink-2)}
+.card .n{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--ink-3);display:block;margin-bottom:7px}
+
+.key{border-left:2px solid var(--neon);padding:14px 0 14px 18px;background:linear-gradient(90deg,rgba(176,16,47,.2),transparent 78%);margin:4px 0 18px}
+.key p{margin:0;color:var(--ink);font-size:clamp(.98rem,1.5vw,1.14rem);line-height:1.52}
+.key .tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--neon);display:block;margin-bottom:7px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:rgba(12,3,8,.46)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid rgba(255,120,150,.11);vertical-align:top;line-height:1.45}
+thead th{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--neon);
+  background:rgba(176,16,47,.14);border-bottom:1px solid var(--line-2);position:sticky;top:0}
+tbody th{font-family:var(--mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:400;white-space:nowrap}
+td{color:var(--ink-2)}
+tr:last-child th,tr:last-child td{border-bottom:0}
+
+.viz{width:100%;display:block;overflow:visible;filter:drop-shadow(0 0 26px rgba(255,31,79,.26))}
+.vizbox{position:relative;display:flex;align-items:center;justify-content:center;min-width:0}
+.capsid{width:100%;max-width:420px;aspect-ratio:1;display:block;max-height:46vh}
+.cap-label{position:absolute;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.cap-label b{color:var(--rose);font-weight:500}
+
+.stat{display:flex;gap:clamp(16px,3vw,38px);flex-wrap:wrap;margin:6px 0 20px}
+.stat div{min-width:0}
+.stat .v{font-family:var(--display);font-variation-settings:"wdth" 110,"wght" 700;font-size:clamp(1.5rem,3.4vw,2.3rem);
+  color:var(--neon);line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(255,31,79,.5)}
+.stat .k{font-family:var(--mono);font-size:.58rem;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+
+.myth{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:13px}
+.myth .m{border:1px solid var(--line);border-radius:3px;padding:16px 17px;background:linear-gradient(160deg,rgba(52,10,29,.5),rgba(12,3,8,.4))}
+.myth .q{font-family:var(--display);font-variation-settings:"wdth" 102,"wght" 600;font-size:.98rem;color:var(--ink);line-height:1.34;margin:0 0 10px;text-wrap:balance}
+.myth .q::before{content:"MITO";font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--ink-3);display:block;margin-bottom:7px;font-variation-settings:normal}
+.myth .a{font-size:.88rem;line-height:1.5;color:var(--ink-2);margin:0;padding-top:10px;border-top:1px solid rgba(255,120,150,.14)}
+.myth .a::before{content:"NA VERDADE ";font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;color:var(--neon)}
+
+.src{font-family:var(--mono);font-size:.68rem;line-height:1.75;color:var(--ink-3);letter-spacing:.01em;margin:0}
+.src b{color:var(--ink-2);font-weight:400}
+
+/* painel de falas */
+.notes{position:fixed;z-index:50;left:0;right:0;bottom:0;background:rgba(10,3,7,.95);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line-2);transform:translateY(102%);transition:transform .45s cubic-bezier(.22,.85,.2,1);
+  padding-block:20px calc(62px + env(safe-area-inset-bottom,0px));
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));
+  max-height:58vh;overflow-y:auto}
+.notes.open{transform:translateY(0)}
+.notes .tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--neon);display:block;margin-bottom:11px}
+.notes p{font-size:1.02rem;line-height:1.66;color:var(--ink);max-width:76ch;margin:0 0 11px}
+.notes p:last-child{margin:0}
+
+.hint{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:calc(52px + env(safe-area-inset-bottom,0px));
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-3);
+  opacity:.8;transition:opacity .5s;pointer-events:none;text-align:center}
+.hint.gone{opacity:0}
+
+/* tela cheia: sai tudo que nao for avancar — fica so o par de setas */
+body.fs .hud-top,
+body.fs .dots,
+body.fs #btnNotes,
+body.fs #btnPresenter,
+body.fs #btnFull{display:none}
+body.fs .rail{background:transparent;pointer-events:none}
+body.fs .nav{margin-left:auto;pointer-events:auto}
+body.fs .btn{opacity:.5;transition:opacity .25s}
+body.fs .rail:hover .btn,
+body.fs .btn:focus-visible{opacity:1}
+
+@media (max-width:820px){
+  .grid2,.grid2.flip{grid-template-columns:1fr;gap:26px}
+  .vizbox{order:-1}
+  .capsid{max-height:30vh}
+  .hud-scale span{display:none}
+  .dots{gap:4px}
+  .dot{width:11px}
+}
+@media (max-width:430px){
+  .inner{padding-block:clamp(66px,10vh,88px)}
+  .btn{padding:6px 10px;font-size:.58rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true">
+  <div class="nebula a"></div><div class="nebula b"></div><div class="nebula c"></div>
+  <div class="rings"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div></div>
+  <div class="particles" id="particles"></div>
+  <div class="grain"></div><div class="vignette"></div>
+</div>
+
+<div class="hud hud-top">
+  <div class="hud-chapter"><b id="hudNum">01</b> &nbsp;<span id="hudName">Abertura</span></div>
+  <div class="hud-scale"><span>escala</span><i></i><span id="hudScale">1 m</span></div>
+</div>
+
+<main class="stage" id="stage">
+
+<!-- 01 -->
+<section class="scene is-active" data-chapter="Abertura" data-scale="1 m" data-notes="Olá, pessoal. Antes de começar, um aviso: nada do que vocês vão ver aqui é foto. É tudo ilustração científica, porque o que importa hoje não é a aparência da lesão — é entender o que está acontecendo lá dentro.|Vamos falar de duas Infecções Sexualmente Transmissíveis muito diferentes entre si: o condiloma acuminado, causado por um vírus, e o cancro mole, causado por uma bactéria. Duas escalas, dois comportamentos, dois tratamentos." data-time="35">
+  <div class="inner">
+    <div class="grid2">
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Biologia · Infecções Sexualmente Transmissíveis</p>
+        <h1 class="layer" style="--d:110">O mundo<br>invisível</h1>
+        <p class="lede layer" style="--d:260;margin-top:22px">Condiloma acuminado e cancro mole, vistos na escala em que realmente acontecem.</p>
+        <div class="stat layer" style="--d:380">
+          <div><div class="v">55 nm</div><div class="k">o vírus HPV</div></div>
+          <div><div class="v">1,5 µm</div><div class="k">a bactéria <span class="sci">H. ducreyi</span></div></div>
+          <div><div class="v">≈ 30×</div><div class="k">diferença de tamanho</div></div>
+        </div>
+      </div>
+      <div class="col vizbox layer" style="--d:200">
+        <canvas class="capsid" data-capsid data-dim="0.85" aria-label="Modelo tridimensional do capsídeo viral"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="scene" data-chapter="O que é uma IST" data-scale="1 m" data-notes="IST significa Infecção Sexualmente Transmissível. A sigla antiga era DST, de doença. A troca aconteceu em 2016 e não é detalhe: muita gente está infectada e transmite sem ter nenhum sintoma. Existe infecção sem doença aparente.|Isso explica por que as duas ISTs de hoje se comportam de formas tão diferentes. O cancro mole dá sintoma em poucos dias e dói muito. O HPV pode ficar meses em silêncio." data-time="35">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 01</p>
+    <h2 class="layer" style="--d:80">Infecção não é a mesma coisa que doença</h2>
+    <p class="lede layer" style="--d:160">ISTs são infecções transmitidas principalmente pelo contato sexual — vaginal, anal ou oral. Algumas delas nem exigem penetração: basta o contato direto entre pele e mucosa.</p>
+    <div class="cards layer" style="--d:260">
+      <div class="card"><span class="n">Agente 01</span><h3>Vírus</h3><p>HPV, HIV, herpes, hepatites B e C. Não são células: precisam invadir uma célula viva para se multiplicar.</p></div>
+      <div class="card"><span class="n">Agente 02</span><h3>Bactérias</h3><p><span class="sci">Haemophilus ducreyi</span> (cancro mole), <span class="sci">Treponema pallidum</span> (sífilis), gonorreia, clamídia. São células completas.</p></div>
+      <div class="card"><span class="n">Agente 03</span><h3>Outros</h3><p>Protozoários, como o da tricomoníase, e fungos. O agente determina o diagnóstico e o tratamento.</p></div>
+    </div>
+    <div class="key layer" style="--d:380;margin-top:22px">
+      <span class="tag">Por que a sigla mudou</span>
+      <p>Em 2016 o Ministério da Saúde trocou <strong>DST</strong> por <strong>IST</strong>. A palavra “infecção” inclui quem está infectado e transmite <strong>sem apresentar sintoma nenhum</strong> — a situação mais comum no caso do HPV.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="scene" data-chapter="Aproximação" data-scale="1 m → 55 nm" data-notes="Para entender o resto da apresentação, precisamos combinar as escalas. Esta régua é logarítmica: cada passo é dez vezes menor que o anterior.|Partindo do corpo inteiro, descemos até a lesão que se vê a olho nu, depois até a célula da pele, depois até a bactéria e, por último, até o vírus. Do começo ao fim dessa régua são sete ordens de grandeza." data-time="35">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 02 · Zoom</p>
+    <h2 class="layer" style="--d:80">Sete ordens de grandeza para baixo</h2>
+    <p class="layer" style="--d:150">Cada marca da régua é dez vezes menor que a anterior. É o caminho que vamos percorrer: do corpo até o vírus.</p>
+    <div class="layer" style="--d:240">
+      <svg class="viz" viewBox="0 0 900 250" role="img" aria-label="Régua logarítmica de escalas, de 1 metro até 55 nanômetros">
+        <defs>
+          <linearGradient id="gRule" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#b0102f" stop-opacity=".25"/><stop offset=".55" stop-color="#ff1f4f" stop-opacity=".85"/><stop offset="1" stop-color="#ff7d9a"/>
+          </linearGradient>
+          <filter id="glowS" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <line x1="60" y1="130" x2="850" y2="130" stroke="url(#gRule)" stroke-width="2"/>
+        <g font-family="IBM Plex Mono, monospace" text-anchor="middle">
+          <g><line x1="70" y1="112" x2="70" y2="148" stroke="#ff7d9a" stroke-width="1.5"/><circle cx="70" cy="130" r="9" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.5" filter="url(#glowS)"/><text x="70" y="94" fill="#fff0f3" font-size="17">1 m</text><text x="70" y="176" fill="#b98b98" font-size="11">corpo</text></g>
+          <g><line x1="265" y1="114" x2="265" y2="146" stroke="#ff7d9a" stroke-width="1.5"/><circle cx="265" cy="130" r="8" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.5" filter="url(#glowS)"/><text x="265" y="94" fill="#fff0f3" font-size="17">1 mm</text><text x="265" y="176" fill="#b98b98" font-size="11">verruga visível</text></g>
+          <g><line x1="460" y1="116" x2="460" y2="144" stroke="#ff7d9a" stroke-width="1.5"/><circle cx="460" cy="130" r="7" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.5" filter="url(#glowS)"/><text x="460" y="94" fill="#fff0f3" font-size="17">100 µm</text><text x="460" y="176" fill="#b98b98" font-size="11">célula da pele</text></g>
+          <g><line x1="655" y1="118" x2="655" y2="142" stroke="#ff7d9a" stroke-width="1.5"/><circle cx="655" cy="130" r="6" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.5" filter="url(#glowS)"/><text x="655" y="94" fill="#fff0f3" font-size="17">1,5 µm</text><text x="655" y="176" fill="#b98b98" font-size="11"><tspan font-style="italic">H. ducreyi</tspan></text></g>
+          <g><line x1="845" y1="120" x2="845" y2="140" stroke="#ff7d9a" stroke-width="1.5"/><circle cx="845" cy="130" r="5" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.5" filter="url(#glowS)"/><text x="845" y="94" fill="#fff0f3" font-size="17">55 nm</text><text x="845" y="176" fill="#b98b98" font-size="11">HPV</text></g>
+          <text x="455" y="226" fill="#b98b98" font-size="11" letter-spacing="2">ESCALA LOGARÍTMICA — CADA MARCA É 10× MENOR QUE A ANTERIOR</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="scene" data-chapter="HPV · o agente" data-scale="55 nm" data-notes="Este é o HPV, o Papilomavírus humano. Ele é minúsculo: cinquenta e cinco nanômetros, mais de mil vezes menor que a espessura de um fio de cabelo.|Repare em três coisas. Primeiro: o material genético é DNA de dupla fita, circular. Segundo: a casca é um capsídeo icosaédrico feito de setenta e dois capsômeros da proteína L1. Terceiro, e mais importante: ele não tem envelope de gordura, e por isso resiste bem no ambiente.|Existem mais de duzentos tipos de HPV. Guardem dois números: seis e onze causam cerca de noventa por cento das verrugas genitais. Dezesseis e dezoito são os de alto risco, ligados ao câncer." data-time="50">
+  <div class="inner">
+    <div class="grid2 flip">
+      <div class="col vizbox layer" style="--d:140">
+        <canvas class="capsid" data-capsid data-dim="1" aria-label="Capsídeo icosaédrico do HPV com 72 capsômeros"></canvas>
+      </div>
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Capítulo 03 · Condiloma acuminado</p>
+        <h2 class="layer" style="--d:60">HPV: uma cápsula de proteína com DNA dentro</h2>
+        <ul class="list layer" style="--d:160">
+          <li><strong>Família <span class="sci">Papillomaviridae</span>.</strong> Vírus de <strong>DNA de dupla fita, circular</strong>, com cerca de 8.000 pares de bases.</li>
+          <li><strong>Capsídeo icosaédrico</strong> formado por 72 capsômeros da proteína L1, mais a proteína L2 no interior.</li>
+          <li><strong>Não tem envelope lipídico.</strong> Por isso é mais resistente fora do corpo do que vírus envelopados como o HIV.</li>
+          <li>Mais de <strong>200 tipos</strong> descritos; cerca de 40 infectam a região anogenital.</li>
+        </ul>
+        <div class="key layer" style="--d:300">
+          <span class="tag">Os quatro números que importam</span>
+          <p><strong>HPV 6 e 11</strong> — baixo risco oncogênico, respondem por cerca de <strong>90% das verrugas anogenitais</strong>. <strong>HPV 16 e 18</strong> — alto risco, principais responsáveis pelo câncer do colo do útero. A vacina cobre os quatro.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="scene" data-chapter="Condiloma · transmissão" data-scale="100 µm" data-notes="Agora o mecanismo. O HPV entra por microfissuras e vai direto para a camada basal do epitélio, a camada mais profunda, onde ficam as células que se dividem.|Ele sequestra a maquinaria dessa célula. Conforme a célula infectada amadurece e sobe para a superfície, o vírus se multiplica junto. O resultado dessa proliferação exagerada é a verruga.|Uma observação importante: o período de incubação é longo e variável. Em média cerca de três meses, mas pode levar anos. Por isso quase nunca dá para dizer quando ou de quem a pessoa pegou." data-time="45">
+  <div class="inner">
+    <div class="grid2">
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Capítulo 03 · Condiloma acuminado</p>
+        <h2 class="layer" style="--d:60">Como o vírus vira verruga</h2>
+        <ul class="list layer" style="--d:150">
+          <li>Transmissão por <strong>contato direto pele a pele ou mucosa</strong> durante sexo vaginal, anal ou oral.</li>
+          <li>O vírus entra por <strong>microfissuras</strong> e infecta as células da <strong>camada basal</strong> do epitélio.</li>
+          <li>Usa a maquinaria da célula para se replicar enquanto ela amadurece e sobe para a superfície.</li>
+          <li>A proliferação celular exagerada forma a <strong>lesão verrucosa</strong>.</li>
+          <li>Transmissão <strong>vertical</strong> (da mãe para o bebê no parto) é possível, mas rara.</li>
+        </ul>
+        <div class="key layer" style="--d:280">
+          <span class="tag">Incubação</span>
+          <p>De <strong>algumas semanas a vários meses</strong> — em média cerca de três. O vírus também pode ficar latente por anos, o que torna quase impossível datar o contágio.</p>
+        </div>
+      </div>
+      <div class="col vizbox layer" style="--d:200">
+        <svg class="viz" viewBox="0 0 460 340" role="img" aria-label="Corte do epitélio mostrando a infecção pelo HPV na camada basal e a formação da verruga">
+          <defs>
+            <linearGradient id="gEp" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff7d9a" stop-opacity=".30"/><stop offset="1" stop-color="#b0102f" stop-opacity=".10"/>
+            </linearGradient>
+            <linearGradient id="gDerm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#340a1d" stop-opacity=".9"/><stop offset="1" stop-color="#1c0510" stop-opacity=".6"/>
+            </linearGradient>
+            <filter id="glowE" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- derme -->
+          <rect x="24" y="252" width="412" height="66" fill="url(#gDerm)" stroke="rgba(255,120,150,.2)"/>
+          <path d="M70 318 q22 -40 54 -30 q30 10 26 30" fill="none" stroke="#ff1f4f" stroke-width="2" opacity=".55"/>
+          <!-- epiderme com papiloma -->
+          <path d="M24 252 L24 150 Q110 150 140 104 Q166 64 196 104 Q222 142 250 102 Q278 60 306 106 Q332 150 436 150 L436 252 Z" fill="url(#gEp)" stroke="rgba(255,125,154,.55)" stroke-width="1.5"/>
+          <line x1="24" y1="252" x2="436" y2="252" stroke="#ff1f4f" stroke-width="2" opacity=".85"/>
+          <!-- camada basal: células -->
+          <g fill="#ff1f4f" opacity=".9">
+            <circle cx="46" cy="243" r="6"/><circle cx="74" cy="243" r="6"/><circle cx="102" cy="243" r="6"/><circle cx="130" cy="243" r="6"/>
+            <circle cx="158" cy="243" r="6"/><circle cx="186" cy="243" r="6"/><circle cx="214" cy="243" r="6"/><circle cx="242" cy="243" r="6"/>
+            <circle cx="270" cy="243" r="6"/><circle cx="298" cy="243" r="6"/><circle cx="326" cy="243" r="6"/><circle cx="354" cy="243" r="6"/>
+            <circle cx="382" cy="243" r="6"/><circle cx="410" cy="243" r="6"/>
+          </g>
+          <!-- virions entrando -->
+          <g filter="url(#glowE)" fill="#ff4d6d">
+            <circle cx="196" cy="206" r="4"/><circle cx="214" cy="186" r="3.4"/><circle cx="230" cy="162" r="3"/><circle cx="208" cy="140" r="2.6"/><circle cx="226" cy="118" r="2.3"/>
+          </g>
+          <path d="M186 268 L196 248" stroke="#ff7d9a" stroke-width="1.4" marker-end="url(#ar)"/>
+          <defs><marker id="ar" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#ff7d9a"/></marker></defs>
+          <path d="M250 230 L250 130" stroke="#ff7d9a" stroke-width="1.2" stroke-dasharray="4 5" opacity=".8" marker-end="url(#ar)"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#e8bcc7" letter-spacing=".5">
+            <text x="340" y="118">camada córnea</text>
+            <text x="340" y="176">camada espinhosa</text>
+            <text x="340" y="238">camada basal</text>
+            <text x="30" y="300" fill="#b98b98">derme · vaso sanguíneo</text>
+            <text x="126" y="276" fill="#ff7d9a">entrada do vírus</text>
+            <text x="258" y="126" fill="#ff7d9a">replicação</text>
+            <text x="150" y="52" fill="#fff0f3" font-size="12">projeções papilomatosas</text>
+          </g>
+          <path d="M196 60 L206 84" stroke="#ff7d9a" stroke-width="1" opacity=".7"/>
+          <g stroke="rgba(255,255,255,.3)" stroke-width="1" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#b98b98">
+            <line x1="380" y1="316" x2="432" y2="316"/><line x1="380" y1="312" x2="380" y2="320"/><line x1="432" y1="312" x2="432" y2="320"/>
+            <text x="384" y="332">100 µm</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="scene" data-chapter="Condiloma · sinais" data-scale="5 mm" data-notes="Esta é a aparência clássica: verrugas moles, da cor da pele ou rosadas, com superfície irregular. Quando se agrupam, formam o aspecto de couve-flor, que é como o condiloma aparece nos livros.|A característica que mais ajuda no diagnóstico é esta: em geral são indolores. Podem coçar ou sangrar se forem traumatizadas, mas não doem. Guardem isso, porque daqui a pouco vamos ver uma lesão que dói muito.|E o dado mais importante do slide: a maioria absoluta das infecções por HPV é assintomática e o próprio sistema imune resolve sozinho em um a dois anos." data-time="45">
+  <div class="inner">
+    <div class="grid2 flip">
+      <div class="col vizbox layer" style="--d:160">
+        <svg class="viz" viewBox="0 0 440 320" role="img" aria-label="Ilustração esquemática de uma verruga anogenital com aspecto de couve-flor">
+          <defs>
+            <radialGradient id="gLobe" cx=".35" cy=".3" r=".8">
+              <stop offset="0" stop-color="#ff9db3" stop-opacity=".85"/><stop offset=".55" stop-color="#ff1f4f" stop-opacity=".42"/><stop offset="1" stop-color="#6d0a1e" stop-opacity=".3"/>
+            </radialGradient>
+            <filter id="glowW" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <line x1="30" y1="262" x2="410" y2="262" stroke="#ff1f4f" stroke-width="2" opacity=".7"/>
+          <rect x="30" y="262" width="380" height="34" fill="#340a1d" opacity=".45"/>
+          <g filter="url(#glowW)">
+            <path d="M190 262 q-8 -32 4 -52 q10 -18 26 -16 q18 2 22 20 q6 26 -4 48 Z" fill="url(#gLobe)" stroke="rgba(255,157,179,.6)" stroke-width="1.2"/>
+            <circle cx="176" cy="178" r="30" fill="url(#gLobe)" stroke="rgba(255,157,179,.55)" stroke-width="1.2"/>
+            <circle cx="232" cy="166" r="34" fill="url(#gLobe)" stroke="rgba(255,157,179,.55)" stroke-width="1.2"/>
+            <circle cx="204" cy="128" r="28" fill="url(#gLobe)" stroke="rgba(255,157,179,.55)" stroke-width="1.2"/>
+            <circle cx="152" cy="140" r="21" fill="url(#gLobe)" stroke="rgba(255,157,179,.5)" stroke-width="1.1"/>
+            <circle cx="256" cy="124" r="20" fill="url(#gLobe)" stroke="rgba(255,157,179,.5)" stroke-width="1.1"/>
+            <circle cx="198" cy="94" r="17" fill="url(#gLobe)" stroke="rgba(255,157,179,.5)" stroke-width="1.1"/>
+            <circle cx="236" cy="96" r="14" fill="url(#gLobe)" stroke="rgba(255,157,179,.45)" stroke-width="1"/>
+            <circle cx="318" cy="246" r="13" fill="url(#gLobe)" stroke="rgba(255,157,179,.45)" stroke-width="1"/>
+            <circle cx="338" cy="252" r="9" fill="url(#gLobe)" stroke="rgba(255,157,179,.4)" stroke-width="1"/>
+            <circle cx="92" cy="250" r="10" fill="url(#gLobe)" stroke="rgba(255,157,179,.4)" stroke-width="1"/>
+          </g>
+          <!-- eixo fibrovascular -->
+          <g stroke="#ff4d6d" stroke-width="1.6" opacity=".85" fill="none">
+            <path d="M208 258 L204 196 L182 170"/><path d="M204 196 L230 168"/><path d="M204 196 L204 146"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#e8bcc7">
+            <text x="300" y="150">lobos agrupados</text><text x="300" y="166" fill="#b98b98">“aspecto de couve-flor”</text>
+            <line x1="296" y1="146" x2="266" y2="142" stroke="rgba(255,120,150,.5)"/>
+            <text x="34" y="206">eixo fibrovascular</text>
+            <line x1="112" y1="202" x2="178" y2="196" stroke="rgba(255,120,150,.5)"/>
+            <text x="34" y="288" fill="#b98b98">pele / mucosa</text>
+          </g>
+          <g stroke="rgba(255,255,255,.3)" stroke-width="1" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#b98b98">
+            <line x1="352" y1="298" x2="404" y2="298"/><line x1="352" y1="294" x2="352" y2="302"/><line x1="404" y1="294" x2="404" y2="302"/>
+            <text x="360" y="314">5 mm</text>
+          </g>
+        </svg>
+      </div>
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Capítulo 03 · Condiloma acuminado</p>
+        <h2 class="layer" style="--d:60">Sinais e sintomas</h2>
+        <ul class="list layer" style="--d:150">
+          <li>Verrugas <strong>moles</strong>, da cor da pele ou rosadas, de superfície irregular e granulosa.</li>
+          <li>Quando se agrupam, formam o clássico <strong>aspecto de couve-flor</strong>.</li>
+          <li>Em geral <strong>indolores</strong>; podem coçar, arder ou sangrar se traumatizadas.</li>
+          <li>Locais: vulva, vagina, colo do útero, pênis, escroto, região perianal e ânus — e também boca e garganta.</li>
+          <li>Únicas ou múltiplas, de poucos milímetros a placas extensas.</li>
+        </ul>
+        <div class="key layer" style="--d:280">
+          <span class="tag">O dado mais importante</span>
+          <p>A <strong>maioria das infecções por HPV é assintomática</strong> e regride sozinha pela ação do sistema imune em <strong>1 a 2 anos</strong>. A verruga visível é só a ponta do iceberg.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="scene" data-chapter="Condiloma · diagnóstico" data-scale="5 mm" data-notes="O diagnóstico do condiloma é clínico: o profissional reconhece pela aparência. Biópsia só em caso de dúvida, lesão que não melhora ou suspeita de malignidade.|Um ponto que costuma confundir: não se pede teste de DNA de HPV para diagnosticar verruga. O resultado não mudaria a conduta. O teste de HPV e o Papanicolau servem para outra coisa, que é o rastreio do câncer do colo do útero.|E a regra de ouro: quem tem uma IST pode ter outra. Sempre se oferece testagem para sífilis, HIV e hepatites B e C." data-time="45">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 03 · Condiloma acuminado</p>
+    <h2 class="layer" style="--d:60">Como se faz o diagnóstico</h2>
+    <div class="cards layer" style="--d:150">
+      <div class="card"><span class="n">Etapa 01</span><h3>Exame clínico</h3><p>Na prática, é assim que se diagnostica. O profissional reconhece a lesão pela aparência característica.</p></div>
+      <div class="card"><span class="n">Etapa 02</span><h3>Biópsia</h3><p>Reservada a casos atípicos, lesões que não respondem ao tratamento, recidiva frequente ou suspeita de malignidade.</p></div>
+      <div class="card"><span class="n">Etapa 03</span><h3>Rastreio do colo</h3><p>Papanicolau (citologia) e, onde disponível, teste molecular de HPV. Serve para detectar lesões precursoras de câncer — não para diagnosticar a verruga.</p></div>
+      <div class="card"><span class="n">Etapa 04</span><h3>Outras ISTs</h3><p>Sempre oferecer testagem para sífilis, HIV e hepatites B e C. Quem tem uma IST tem risco aumentado de ter outra.</p></div>
+    </div>
+    <div class="key layer" style="--d:300;margin-top:22px">
+      <span class="tag">Não se pede</span>
+      <p>Teste de DNA-HPV <strong>não é indicado</strong> para diagnosticar verruga anogenital: o resultado não muda a conduta nem o tratamento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="scene" data-chapter="Condiloma · tratamento" data-scale="5 mm" data-notes="Aqui está a ideia central deste slide, e eu peço atenção: o tratamento destrói a lesão, não elimina o vírus do corpo. Por isso a recidiva é comum e não significa que a pessoa se reinfectou.|Existem dois grupos. Os autoaplicados em casa, que são a podofilotoxina e o imiquimode. E os aplicados no serviço de saúde: o ácido tricloroacético, a crioterapia com nitrogênio líquido, a eletrocauterização e a retirada cirúrgica.|A escolha depende do tamanho, do número e do local das lesões. Na gestação, podofilotoxina e imiquimode são proibidos; o ácido tricloroacético pode ser usado." data-time="45">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 03 · Condiloma acuminado</p>
+    <h2 class="layer" style="--d:60">Tratamento</h2>
+    <div class="key layer" style="--d:130">
+      <span class="tag">Princípio-chave</span>
+      <p>Todo tratamento disponível <strong>destrói a lesão</strong> — nenhum elimina o vírus do organismo. Por isso a <strong>recidiva é comum</strong> e não significa necessariamente uma nova infecção.</p>
+    </div>
+    <div class="grid2 layer" style="--d:230">
+      <div class="col">
+        <h3>Autoaplicados (em casa)</h3>
+        <ul class="list">
+          <li><strong>Podofilotoxina 0,15% creme</strong> — antimitótico: impede a divisão das células da verruga.</li>
+          <li><strong>Imiquimode 5% creme</strong> — imunomodulador: estimula a própria defesa do corpo a atacar a lesão.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Aplicados no serviço de saúde</h3>
+        <ul class="list">
+          <li><strong>Ácido tricloroacético (ATA) 80–90%</strong> — cáustico, destrói a lesão por coagulação química das proteínas.</li>
+          <li><strong>Crioterapia</strong> com nitrogênio líquido — congelamento.</li>
+          <li><strong>Eletrocauterização</strong> e <strong>exérese cirúrgica</strong> — para lesões grandes ou resistentes.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key layer" style="--d:350">
+      <span class="tag">Gestação</span>
+      <p>Podofilotoxina e imiquimode são <strong>contraindicados</strong> na gravidez. O ATA, a crioterapia e a exérese podem ser usados, sempre com acompanhamento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="scene" data-chapter="Condiloma · prevenção" data-scale="—" data-notes="A prevenção do HPV tem uma arma que as outras ISTs não têm: vacina. É a quadrivalente, que protege contra os tipos seis, onze, dezesseis e dezoito. Está disponível de graça no SUS.|Desde dois mil e vinte e quatro, seguindo a recomendação da Organização Mundial da Saúde, o esquema de rotina é de dose única para meninas e meninos de nove a quatorze anos. Quem tem até dezenove anos e nunca se vacinou também pode tomar.|Agora o ponto delicado: a camisinha reduz muito o risco, mas a proteção contra o HPV é parcial, porque o vírus está na pele de áreas que o preservativo não cobre. Reduz muito, não zera." data-time="55">
+  <div class="inner">
+    <div class="grid2">
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Capítulo 03 · Condiloma acuminado</p>
+        <h2 class="layer" style="--d:60">Prevenção: a vacina muda o jogo</h2>
+        <ul class="list layer" style="--d:150">
+          <li><strong>Vacina HPV quadrivalente</strong> — protege contra os tipos <strong>6, 11, 16 e 18</strong>. Gratuita no SUS.</li>
+          <li><strong>Rotina: dose única</strong> para meninas e meninos de <strong>9 a 14 anos</strong> — esquema adotado no Brasil em 2024, seguindo a recomendação da OMS.</li>
+          <li>Adolescentes de <strong>até 19 anos</strong> nunca vacinados também podem receber uma dose.</li>
+          <li>Pessoas imunossuprimidas, vivendo com HIV ou vítimas de violência sexual seguem <strong>esquemas próprios</strong> (duas ou três doses), até os 45 anos.</li>
+          <li>A vacina é <strong>preventiva</strong>: protege quem ainda não teve contato com aqueles tipos. Não trata lesão já existente.</li>
+        </ul>
+        <div class="key layer" style="--d:300">
+          <span class="tag">Sobre o preservativo</span>
+          <p>Reduz bastante o risco, mas a proteção contra o HPV é <strong>parcial</strong>: o vírus pode estar na pele de regiões que a camisinha não cobre. Reduz muito — não zera.</p>
+        </div>
+      </div>
+      <div class="col vizbox layer" style="--d:200">
+        <svg class="viz" viewBox="0 0 380 340" role="img" aria-label="Escudo representando a vacina quadrivalente contra os tipos 6, 11, 16 e 18 do HPV">
+          <defs>
+            <linearGradient id="gSh" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff1f4f" stop-opacity=".30"/><stop offset="1" stop-color="#b0102f" stop-opacity=".06"/>
+            </linearGradient>
+            <filter id="glowV" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <path d="M190 28 L322 72 V176 Q322 268 190 316 Q58 268 58 176 V72 Z" fill="url(#gSh)" stroke="#ff1f4f" stroke-width="2" filter="url(#glowV)"/>
+          <path d="M190 52 L300 88 V176 Q300 252 190 292 Q80 252 80 176 V88 Z" fill="none" stroke="rgba(255,125,154,.35)" stroke-width="1" stroke-dasharray="5 6"/>
+          <g font-family="Archivo, sans-serif" font-weight="700" text-anchor="middle" filter="url(#glowV)">
+            <circle cx="142" cy="130" r="32" fill="#1c0510" stroke="#ff4d6d" stroke-width="1.6"/><text x="142" y="140" font-size="26" fill="#fff0f3">6</text>
+            <circle cx="238" cy="130" r="32" fill="#1c0510" stroke="#ff4d6d" stroke-width="1.6"/><text x="238" y="140" font-size="26" fill="#fff0f3">11</text>
+            <circle cx="142" cy="212" r="32" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.6"/><text x="142" y="222" font-size="26" fill="#fff0f3">16</text>
+            <circle cx="238" cy="212" r="32" fill="#1c0510" stroke="#ff1f4f" stroke-width="1.6"/><text x="238" y="222" font-size="26" fill="#fff0f3">18</text>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="10" fill="#b98b98" text-anchor="middle" letter-spacing="1">
+            <text x="190" y="104">BAIXO RISCO · VERRUGAS</text>
+            <text x="190" y="266">ALTO RISCO · CÂNCER</text>
+            <text x="190" y="334" fill="#ff7d9a" font-size="10.5">VACINA QUADRIVALENTE · DOSE ÚNICA 9–14 ANOS</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="scene" data-chapter="Vírus × bactéria" data-scale="55 nm × 1,5 µm" data-notes="Vamos mudar de reino. Até agora falamos de um vírus. Agora vamos falar de uma bactéria, e essa diferença explica quase tudo o que vem a seguir.|O vírus não é uma célula. Não tem metabolismo próprio, não come, não se divide sozinho. Ele é um pacote de material genético dentro de uma casca de proteína, e precisa invadir uma célula viva para existir. Por isso não adianta antibiótico contra HPV.|A bactéria é uma célula completa, procarionte. Tem membrana, parede celular, ribossomos e DNA próprio, e se divide sozinha. É por isso que o cancro mole tem cura com antibiótico e o condiloma não." data-time="50">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 04 · Troca de reino</p>
+    <h2 class="layer" style="--d:60">Por que um tem cura com antibiótico e o outro não</h2>
+    <div class="layer" style="--d:170">
+      <svg class="viz" viewBox="0 0 880 300" role="img" aria-label="Comparação entre a estrutura de um vírus e a de uma bactéria">
+        <defs>
+          <radialGradient id="gVir" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff9db3" stop-opacity=".8"/><stop offset=".6" stop-color="#ff1f4f" stop-opacity=".35"/><stop offset="1" stop-color="#6d0a1e" stop-opacity=".25"/></radialGradient>
+          <linearGradient id="gBac" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7d9a" stop-opacity=".40"/><stop offset="1" stop-color="#b0102f" stop-opacity=".16"/></linearGradient>
+          <filter id="glowB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <line x1="440" y1="24" x2="440" y2="266" stroke="rgba(255,120,150,.2)" stroke-dasharray="4 7"/>
+        <!-- vírus -->
+        <g filter="url(#glowB)">
+          <circle cx="196" cy="140" r="62" fill="url(#gVir)" stroke="#ff4d6d" stroke-width="1.6"/>
+          <g fill="none" stroke="rgba(255,157,179,.5)" stroke-width="1">
+            <circle cx="196" cy="140" r="44"/><circle cx="174" cy="118" r="13"/><circle cx="218" cy="118" r="13"/><circle cx="174" cy="162" r="13"/><circle cx="218" cy="162" r="13"/><circle cx="196" cy="140" r="13"/>
+          </g>
+          <path d="M184 140 a12 9 0 1 0 24 0 a12 9 0 1 0 -24 0" fill="none" stroke="#fff0f3" stroke-width="2"/>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#e8bcc7">
+          <text x="286" y="104">capsídeo de proteína</text><line x1="282" y1="100" x2="250" y2="112" stroke="rgba(255,120,150,.45)"/>
+          <text x="286" y="148">DNA circular</text><line x1="282" y1="144" x2="214" y2="142" stroke="rgba(255,120,150,.45)"/>
+          <text x="286" y="192" fill="#ff7d9a">sem metabolismo próprio</text>
+        </g>
+        <g font-family="Archivo, sans-serif" font-weight="700" font-size="22" fill="#fff0f3"><text x="62" y="54">VÍRUS</text></g>
+        <text x="62" y="76" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#b98b98" letter-spacing="1.4">HPV · 55 nm · NÃO É CÉLULA</text>
+        <text x="62" y="248" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#e8bcc7">Antibiótico não tem efeito.</text>
+        <!-- bactéria -->
+        <g filter="url(#glowB)">
+          <rect x="560" y="100" width="188" height="82" rx="41" fill="url(#gBac)" stroke="#ff1f4f" stroke-width="2"/>
+          <rect x="568" y="108" width="172" height="66" rx="33" fill="none" stroke="rgba(255,157,179,.55)" stroke-width="1.2"/>
+          <path d="M608 142 q18 -22 38 0 q18 22 38 0" fill="none" stroke="#fff0f3" stroke-width="2.2"/>
+          <g fill="#ff9db3" opacity=".85">
+            <circle cx="594" cy="124" r="2.6"/><circle cx="616" cy="164" r="2.6"/><circle cx="650" cy="120" r="2.6"/><circle cx="676" cy="162" r="2.6"/><circle cx="706" cy="128" r="2.6"/><circle cx="716" cy="158" r="2.6"/><circle cx="634" cy="156" r="2.6"/><circle cx="690" cy="118" r="2.6"/>
+          </g>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#e8bcc7">
+          <text x="560" y="84">parede celular + membrana</text><line x1="640" y1="88" x2="624" y2="100" stroke="rgba(255,120,150,.45)"/>
+          <text x="560" y="212">nucleoide (DNA)</text><line x1="628" y1="208" x2="644" y2="152" stroke="rgba(255,120,150,.45)"/>
+          <text x="712" y="212">ribossomos</text><line x1="740" y1="208" x2="716" y2="166" stroke="rgba(255,120,150,.45)"/>
+        </g>
+        <g font-family="Archivo, sans-serif" font-weight="700" font-size="22" fill="#fff0f3"><text x="560" y="54">BACTÉRIA</text></g>
+        <text x="560" y="248" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#e8bcc7">Antibiótico destrói a célula: tem cura.</text>
+        <text x="560" y="272" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#b98b98" letter-spacing="1.4">H. DUCREYI · 1,5 µm · CÉLULA PROCARIONTE</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="scene" data-chapter="H. ducreyi · o agente" data-scale="1,5 µm" data-notes="Apresento a vocês o Haemophilus ducreyi, o agente do cancro mole, também chamado de cancroide e popularmente de cavalo.|Um detalhe que vale explicar: ele é um cocobacilo gram-negativo. No método de coloração de Gram, as bactérias gram-negativas ficam rosa-avermelhadas, e as gram-positivas ficam roxo-azuladas. Essa cor da nossa apresentação não é escolha estética: é literalmente a cor que essa bactéria assume na lâmina.|Ela é imóvel, não tem flagelo, e é fastidiosa, ou seja, muito difícil de cultivar no laboratório. Ao microscópio, as bactérias se alinham em fileiras paralelas, o que os livros chamam de cardume de peixes ou trilhos de trem." data-time="50">
+  <div class="inner">
+    <div class="grid2">
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Capítulo 05 · Cancro mole</p>
+        <h2 class="layer" style="--d:60"><span class="sci">Haemophilus ducreyi</span></h2>
+        <ul class="list layer" style="--d:150">
+          <li><strong>Cocobacilo gram-negativo</strong> — na coloração de Gram assume a cor <strong>rosa-avermelhada</strong>. É daí que vem a paleta desta apresentação.</li>
+          <li><strong>Anaeróbio facultativo</strong> e <strong>fastidioso</strong>: cresce apenas em meios de cultura especiais, o que dificulta o diagnóstico laboratorial.</li>
+          <li><strong>Imóvel</strong> — não possui flagelo.</li>
+          <li>Cerca de <strong>1,5 µm</strong> de comprimento: aproximadamente <strong>30 vezes maior</strong> que uma partícula de HPV.</li>
+          <li>Ao microscópio aparece em <strong>fileiras paralelas</strong>, descritas como <em>“cardume de peixes”</em> ou <em>“trilhos de trem”</em>.</li>
+        </ul>
+        <div class="key layer" style="--d:300">
+          <span class="tag">Nome da doença</span>
+          <p><strong>Cancro mole</strong>, também chamado de <strong>cancroide</strong> e conhecido popularmente como <strong>“cavalo”</strong>. É uma doença de <strong>notificação compulsória</strong> no Brasil.</p>
+        </div>
+      </div>
+      <div class="col vizbox layer" style="--d:200">
+        <svg class="viz" viewBox="0 0 440 330" role="img" aria-label="Haemophilus ducreyi ao microscópio, em fileiras paralelas, corado em rosa pelo método de Gram">
+          <defs>
+            <linearGradient id="gRod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9db3"/><stop offset=".48" stop-color="#ff1f4f"/><stop offset="1" stop-color="#7d0c22"/></linearGradient>
+            <filter id="glowR" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <circle cx="220" cy="156" r="140" fill="rgba(52,10,29,.4)" stroke="rgba(255,120,150,.22)"/>
+          <circle cx="220" cy="156" r="118" fill="none" stroke="rgba(255,120,150,.12)" stroke-dasharray="3 8"/>
+          <g filter="url(#glowR)" class="rods">
+            <g transform="rotate(-24 220 156)">
+              <g fill="url(#gRod)" stroke="rgba(255,200,212,.4)" stroke-width=".7">
+                <rect x="130" y="76" width="42" height="15" rx="7.5"/><rect x="178" y="76" width="42" height="15" rx="7.5"/><rect x="226" y="76" width="42" height="15" rx="7.5"/><rect x="274" y="76" width="42" height="15" rx="7.5"/>
+                <rect x="118" y="106" width="42" height="15" rx="7.5"/><rect x="166" y="106" width="42" height="15" rx="7.5"/><rect x="214" y="106" width="42" height="15" rx="7.5"/><rect x="262" y="106" width="42" height="15" rx="7.5"/><rect x="310" y="106" width="42" height="15" rx="7.5"/>
+                <rect x="132" y="136" width="42" height="15" rx="7.5"/><rect x="180" y="136" width="42" height="15" rx="7.5"/><rect x="228" y="136" width="42" height="15" rx="7.5"/><rect x="276" y="136" width="42" height="15" rx="7.5"/>
+                <rect x="120" y="166" width="42" height="15" rx="7.5"/><rect x="168" y="166" width="42" height="15" rx="7.5"/><rect x="216" y="166" width="42" height="15" rx="7.5"/><rect x="264" y="166" width="42" height="15" rx="7.5"/><rect x="312" y="166" width="42" height="15" rx="7.5"/>
+                <rect x="146" y="196" width="42" height="15" rx="7.5"/><rect x="194" y="196" width="42" height="15" rx="7.5"/><rect x="242" y="196" width="42" height="15" rx="7.5"/><rect x="290" y="196" width="42" height="15" rx="7.5"/>
+                <rect x="170" y="226" width="42" height="15" rx="7.5"/><rect x="218" y="226" width="42" height="15" rx="7.5"/><rect x="266" y="226" width="42" height="15" rx="7.5"/>
+              </g>
+            </g>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#e8bcc7">
+            <text x="14" y="26" fill="#ff7d9a">GRAM NEGATIVO</text>
+            <text x="14" y="42" fill="#b98b98">cora em rosa-avermelhado</text>
+            <text x="268" y="306" fill="#b98b98" text-anchor="end">arranjo em “cardume de peixes”</text>
+          </g>
+          <g stroke="rgba(255,255,255,.35)" stroke-width="1" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#b98b98">
+            <line x1="352" y1="300" x2="404" y2="300"/><line x1="352" y1="296" x2="352" y2="304"/><line x1="404" y1="296" x2="404" y2="304"/>
+            <text x="362" y="318">2 µm</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="scene" data-chapter="Cancro mole · sinais" data-scale="10 mm" data-notes="O cancro mole é o oposto do condiloma em quase tudo. A incubação é curtíssima: três a cinco dias. A lesão começa como uma pápula, vira pústula e se rompe formando uma úlcera.|Guardem as cinco características da úlcera: múltiplas, muito dolorosas, bordas irregulares e solapadas, fundo sujo com pus, e base mole. É dessa base mole que vem o nome da doença.|Como o conteúdo da úlcera é cheio de bactéria, acontece a autoinoculação: surgem lesões em espelho nas superfícies que se tocam. E em um terço a metade dos casos aparece o bubão, uma íngua inguinal dolorosa que pode se romper por um único orifício." data-time="50">
+  <div class="inner">
+    <div class="grid2 flip">
+      <div class="col vizbox layer" style="--d:160">
+        <svg class="viz" viewBox="0 0 460 350" role="img" aria-label="Corte mostrando a úlcera do cancro mole com bordas solapadas e, ao lado, o bubão inguinal">
+          <defs>
+            <linearGradient id="gSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7d9a" stop-opacity=".26"/><stop offset="1" stop-color="#b0102f" stop-opacity=".08"/></linearGradient>
+            <radialGradient id="gPus" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#ffd6a0" stop-opacity=".55"/><stop offset=".6" stop-color="#ff7d9a" stop-opacity=".35"/><stop offset="1" stop-color="#7d0c22" stop-opacity=".3"/></radialGradient>
+            <filter id="glowU" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- tecido -->
+          <path d="M20 108 L128 108 Q150 108 146 130 L134 152 Q150 176 186 178 Q222 180 238 156 L228 130 Q222 108 246 108 L330 108 L330 236 L20 236 Z" fill="url(#gSkin)" stroke="rgba(255,125,154,.5)" stroke-width="1.4"/>
+          <!-- cratera -->
+          <path d="M146 130 Q142 170 186 176 Q230 182 228 130 Q212 162 186 160 Q160 158 146 130 Z" fill="url(#gPus)" filter="url(#glowU)"/>
+          <g fill="#ffd6a0" opacity=".5"><circle cx="168" cy="152" r="2.4"/><circle cx="186" cy="160" r="2.4"/><circle cx="204" cy="150" r="2.4"/><circle cx="178" cy="142" r="2"/><circle cx="198" cy="140" r="2"/></g>
+          <!-- infiltrado -->
+          <g fill="#ff1f4f" opacity=".55"><circle cx="150" cy="192" r="3"/><circle cx="170" cy="204" r="3"/><circle cx="192" cy="196" r="3"/><circle cx="214" cy="206" r="3"/><circle cx="232" cy="190" r="3"/><circle cx="132" cy="206" r="3"/><circle cx="252" cy="204" r="3"/><circle cx="202" cy="220" r="3"/><circle cx="162" cy="222" r="3"/></g>
+          <!-- bubão -->
+          <g transform="translate(372,172)">
+            <ellipse cx="0" cy="0" rx="48" ry="40" fill="url(#gSkin)" stroke="#ff1f4f" stroke-width="1.8" filter="url(#glowU)"/>
+            <ellipse cx="0" cy="0" rx="32" ry="25" fill="rgba(255,31,79,.22)" stroke="rgba(255,157,179,.5)"/>
+            <path d="M-6 -40 L-10 -62" stroke="#ff4d6d" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="-11" cy="-66" r="4" fill="#ffd6a0" opacity=".8"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#e8bcc7">
+            <text x="24" y="98">bordas solapadas</text><line x1="96" y1="102" x2="140" y2="124" stroke="rgba(255,120,150,.5)"/>
+            <text x="250" y="98">fundo purulento</text><line x1="248" y1="102" x2="214" y2="140" stroke="rgba(255,120,150,.5)"/>
+            <text x="24" y="258" fill="#b98b98">infiltrado inflamatório · base mole</text>
+            <text x="372" y="244" fill="#ff7d9a" text-anchor="middle">bubão inguinal</text>
+            <text x="372" y="260" fill="#b98b98" text-anchor="middle">fistuliza por 1 orifício</text>
+          </g>
+          <g stroke="rgba(255,255,255,.35)" stroke-width="1" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#b98b98">
+            <line x1="146" y1="288" x2="228" y2="288"/><line x1="146" y1="284" x2="146" y2="292"/><line x1="228" y1="284" x2="228" y2="292"/>
+            <text x="168" y="306">10 mm</text>
+          </g>
+        </svg>
+      </div>
+      <div class="col">
+        <p class="eyebrow layer" style="--d:0">Capítulo 05 · Cancro mole</p>
+        <h2 class="layer" style="--d:60">Rápido, múltiplo e muito doloroso</h2>
+        <ul class="list layer" style="--d:150">
+          <li><strong>Transmissão exclusivamente sexual</strong>, pelo contato direto com a secreção da úlcera.</li>
+          <li><strong>Incubação curta: 3 a 5 dias</strong> (pode chegar a duas semanas).</li>
+          <li>Evolução: <strong>pápula → pústula → úlcera</strong>.</li>
+          <li>Úlceras <strong>múltiplas</strong>, <strong>muito dolorosas</strong>, de <strong>bordas irregulares e solapadas</strong>, <strong>fundo sujo</strong> com secreção purulenta e <strong>base mole</strong> — daí o nome.</li>
+          <li><strong>Autoinoculação</strong>: surgem lesões “em espelho” nas superfícies de pele que se tocam.</li>
+          <li><strong>Bubão</strong>: em cerca de <strong>um terço a metade dos casos</strong>, íngua inguinal dolorosa, quase sempre de um lado só, que pode fistulizar por um <strong>único orifício</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="scene" data-chapter="Úlceras · diferencial" data-scale="10 mm" data-notes="Esta tabela é a parte mais cobrada em prova e a mais útil na vida real. Toda úlcera genital levanta duas hipóteses principais: cancro mole e sífilis primária, que é o cancro duro.|A regra prática para decorar é simples. Cancro mole: múltiplas, dolorosas, fundo sujo, base mole. Cancro duro: única, indolor, fundo limpo, base endurecida. Mole dói, duro não dói.|E ainda existe o cancro misto de Rollet, quando as duas infecções acontecem juntas na mesma pessoa. Por isso nunca se trata uma úlcera genital sem testar para sífilis." data-time="45">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 05 · Diagnóstico diferencial</p>
+    <h2 class="layer" style="--d:60">Cancro mole × cancro duro</h2>
+    <p class="layer" style="--d:130">As duas principais causas de úlcera genital. A regra para decorar: <strong>mole dói, duro não dói</strong>.</p>
+    <div class="tablewrap layer" style="--d:200">
+      <table>
+        <thead><tr><th scope="col">Característica</th><th scope="col">Cancro mole</th><th scope="col">Cancro duro (sífilis primária)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Agente</th><td><span class="sci">Haemophilus ducreyi</span><br>cocobacilo gram-negativo</td><td><span class="sci">Treponema pallidum</span><br>espiroqueta</td></tr>
+          <tr><th scope="row">Incubação</th><td>3 a 5 dias</td><td>10 a 90 dias (média ≈ 21)</td></tr>
+          <tr><th scope="row">Número</th><td>Geralmente múltiplas</td><td>Geralmente única</td></tr>
+          <tr><th scope="row">Dor</th><td><strong>Muito dolorosa</strong></td><td><strong>Indolor</strong></td></tr>
+          <tr><th scope="row">Bordas</th><td>Irregulares e solapadas</td><td>Regulares e bem delimitadas</td></tr>
+          <tr><th scope="row">Base</th><td>Mole</td><td>Endurecida</td></tr>
+          <tr><th scope="row">Fundo</th><td>Sujo, com pus</td><td>Limpo e liso</td></tr>
+          <tr><th scope="row">Íngua</th><td>Dolorosa; pode fistulizar por 1 orifício</td><td>Indolor; não fistuliza</td></tr>
+          <tr><th scope="row">Tratamento</th><td>Azitromicina 1 g, dose única</td><td>Penicilina benzatina</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="key layer" style="--d:320">
+      <span class="tag">Atenção</span>
+      <p>As duas infecções podem ocorrer <strong>ao mesmo tempo</strong> na mesma pessoa — é o chamado <strong>cancro misto de Rollet</strong>. Por isso toda úlcera genital exige teste para sífilis e HIV.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="scene" data-chapter="Cancro mole · tratamento" data-scale="—" data-notes="O diagnóstico é essencialmente clínico, afastando sífilis e herpes. Pode-se fazer o Gram da secreção. A cultura é difícil porque a bactéria é fastidiosa, e o PCR é o mais sensível mas pouco disponível na rede.|O tratamento recomendado pelo Ministério da Saúde é azitromicina um grama por via oral em dose única. A alternativa é ceftriaxona quinhentos miligramas intramuscular, também em dose única. Uma dose e acabou.|Três detalhes práticos: tratar as parcerias sexuais dos últimos dez dias mesmo sem sintomas; se o bubão estiver flutuante, aspirar com agulha e nunca cortar, porque a incisão atrasa a cicatrização; e este é o grande contraste com o HPV — aqui tem cura completa." data-time="55">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 05 · Cancro mole</p>
+    <h2 class="layer" style="--d:60">Diagnóstico e tratamento</h2>
+    <div class="grid2 layer" style="--d:150">
+      <div class="col">
+        <h3>Diagnóstico</h3>
+        <ul class="list">
+          <li><strong>Clínico e por exclusão</strong>: afastar sífilis e herpes genital.</li>
+          <li><strong>Bacterioscopia pelo Gram</strong> da secreção da úlcera.</li>
+          <li><strong>Cultura</strong> em meios especiais — difícil e pouco sensível, porque a bactéria é fastidiosa.</li>
+          <li><strong>PCR</strong> é o método mais sensível, mas tem pouca disponibilidade na rede.</li>
+          <li>Testar sempre para <strong>sífilis e HIV</strong>: a úlcera genital é porta de entrada e aumenta o risco de transmissão do HIV.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Tratamento</h3>
+        <ul class="list">
+          <li><strong>Azitromicina 1 g, via oral, dose única</strong> — primeira escolha do Ministério da Saúde.</li>
+          <li><strong>Alternativa: ceftriaxona 500 mg, intramuscular, dose única.</strong></li>
+          <li>Tratar as <strong>parcerias sexuais dos últimos 10 dias</strong>, mesmo sem sintomas.</li>
+          <li>Bubão flutuante: <strong>aspirar com agulha</strong>, nunca incisar — a incisão atrasa a cicatrização.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key layer" style="--d:300">
+      <span class="tag">O grande contraste</span>
+      <p>O cancro mole <strong>tem cura completa</strong> com uma dose de antibiótico. O HPV não: o tratamento remove a lesão, mas o vírus pode permanecer no organismo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="scene" data-chapter="Comparativo" data-scale="—" data-notes="Vamos juntar tudo. Esta tabela é o resumo da apresentação inteira — se vocês guardarem só um slide, guardem este.|Vírus contra bactéria. Incubação de meses contra incubação de dias. Verruga indolor contra úlcera dolorida. Sem cura definitiva contra cura com uma dose. E, na prevenção, o HPV tem vacina; o cancro mole não tem, mas o preservativo o bloqueia muito bem." data-time="35">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 06 · Síntese</p>
+    <h2 class="layer" style="--d:60">Lado a lado</h2>
+    <div class="tablewrap layer" style="--d:150">
+      <table>
+        <thead><tr><th scope="col">&nbsp;</th><th scope="col">Condiloma acuminado</th><th scope="col">Cancro mole</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Agente</th><td>HPV (vírus de DNA)</td><td><span class="sci">Haemophilus ducreyi</span> (bactéria)</td></tr>
+          <tr><th scope="row">Tamanho</th><td>≈ 55 nm</td><td>≈ 1,5 µm (cerca de 30× maior)</td></tr>
+          <tr><th scope="row">Incubação</th><td>Semanas a meses (média ≈ 3 meses)</td><td>3 a 5 dias</td></tr>
+          <tr><th scope="row">Lesão</th><td>Verruga, aspecto de couve-flor</td><td>Úlcera de fundo sujo e base mole</td></tr>
+          <tr><th scope="row">Dor</th><td>Em geral indolor</td><td>Muito dolorosa</td></tr>
+          <tr><th scope="row">Assintomático?</th><td>Muito comum</td><td>Raro — dá sintoma quase sempre</td></tr>
+          <tr><th scope="row">Tratamento</th><td>Destrói a lesão (ATA, crioterapia, imiquimode…)</td><td>Antibiótico em dose única</td></tr>
+          <tr><th scope="row">Cura</th><td>Sem cura garantida: o vírus pode permanecer</td><td><strong>Cura completa</strong></td></tr>
+          <tr><th scope="row">Vacina</th><td><strong>Sim</strong> — quadrivalente 6, 11, 16, 18</td><td>Não existe</td></tr>
+          <tr><th scope="row">Preservativo</th><td>Proteção parcial</td><td>Proteção alta</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="scene" data-chapter="Prevenção" data-scale="—" data-notes="A parte prática. Camisinha em todas as relações, incluindo sexo oral e anal. Vacina de HPV na idade indicada, de graça no posto. Testagem regular, porque muita IST não dá sintoma.|Duas coisas que costumam falhar: tratar a parceria e não se automedicar. Não adianta tratar só uma pessoa, porque a reinfecção é imediata. E nunca passar pomada, creme ou receita caseira numa lesão genital — isso mascara o quadro e atrasa o diagnóstico.|Por fim: no SUS o atendimento para IST é gratuito, e o sigilo é parte do atendimento. Adolescente pode ser atendido sem estar acompanhado." data-time="50">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 07 · Prevenção</p>
+    <h2 class="layer" style="--d:60">O que realmente funciona</h2>
+    <div class="cards layer" style="--d:150">
+      <div class="card"><span class="n">01</span><h3>Preservativo</h3><p>Externo ou interno, em todas as relações — vaginais, anais e orais. Barreira muito eficaz contra o cancro mole e proteção parcial contra o HPV.</p></div>
+      <div class="card"><span class="n">02</span><h3>Vacina HPV</h3><p>Dose única dos 9 aos 14 anos, gratuita no SUS. É preventiva: funciona melhor antes do início da vida sexual.</p></div>
+      <div class="card"><span class="n">03</span><h3>Testagem</h3><p>Testes rápidos de HIV, sífilis e hepatites B e C estão disponíveis na rede pública. Muitas ISTs não dão sintoma.</p></div>
+      <div class="card"><span class="n">04</span><h3>Tratar a parceria</h3><p>Tratar apenas uma das pessoas leva à reinfecção. O serviço de saúde orienta como comunicar as parcerias.</p></div>
+      <div class="card"><span class="n">05</span><h3>Procurar atendimento</h3><p>Qualquer lesão, corrimento, dor ou íngua merece avaliação. No SUS o atendimento é gratuito e sigiloso.</p></div>
+      <div class="card"><span class="n">06</span><h3>Não se automedicar</h3><p>Pomadas, cremes por conta própria ou receitas caseiras mascaram o quadro, atrasam o diagnóstico e podem piorar a lesão.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="scene" data-chapter="Mitos" data-scale="—" data-notes="Separei as cinco frases que mais se ouvem por aí, para derrubar uma por uma.|Vou destacar duas. A do vaso sanitário: não transmite. O HPV precisa de contato direto pele a pele, e o Haemophilus ducreyi precisa de contato com a secreção da úlcera durante o sexo.|E a da vacina: tomar a vacina do HPV não dispensa a camisinha. A vacina cobre quatro tipos de um único vírus. Ela não protege contra sífilis, gonorreia, HIV, clamídia nem contra o cancro mole." data-time="40">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Capítulo 08 · Mitos e verdades</p>
+    <h2 class="layer" style="--d:60">Cinco frases que você já ouviu</h2>
+    <div class="myth layer" style="--d:150">
+      <div class="m"><p class="q">“Pega em vaso sanitário, piscina ou toalha.”</p><p class="a">Não. O HPV exige contato direto pele a pele ou mucosa, e o <span class="sci">H. ducreyi</span> exige contato com a secreção da úlcera durante a relação sexual.</p></div>
+      <div class="m"><p class="q">“Se não dói, não é nada.”</p><p class="a">O condiloma é indolor na maioria das vezes, e a forma mais comum de infecção por HPV é justamente a que não dá sintoma nenhum.</p></div>
+      <div class="m"><p class="q">“Tomei a vacina, não preciso de camisinha.”</p><p class="a">A vacina cobre quatro tipos de um único vírus. Não protege contra sífilis, gonorreia, clamídia, HIV nem contra o cancro mole.</p></div>
+      <div class="m"><p class="q">“Cancro mole é o mesmo que sífilis.”</p><p class="a">São bactérias diferentes, com úlceras de aspecto oposto e tratamentos diferentes. Podem, porém, ocorrer juntas.</p></div>
+      <div class="m"><p class="q">“A verruga sumiu, então estou curado.”</p><p class="a">O tratamento remove a lesão, não o vírus. A recidiva é comum e o acompanhamento continua sendo necessário.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 -->
+<section class="scene" data-chapter="Fechamento" data-scale="—" data-notes="Para encerrar, três ideias.|Primeira: o agente define tudo. Vírus e bactéria exigem abordagens completamente diferentes, e é por isso que antibiótico não resolve condiloma.|Segunda: o silêncio é o maior risco. A maior parte das infecções por HPV não dá sintoma, e é assim que a transmissão continua.|Terceira: as duas são evitáveis. Camisinha, vacina, testagem e tratamento da parceria. Obrigada — e se alguém tiver dúvida, podemos conversar agora." data-time="35">
+  <div class="inner">
+    <p class="eyebrow layer" style="--d:0">Encerramento</p>
+    <h2 class="layer" style="--d:60">Três ideias para levar</h2>
+    <div class="cards layer" style="--d:150">
+      <div class="card"><span class="n">Ideia 01</span><h3>O agente define tudo</h3><p>Vírus e bactéria pedem abordagens diferentes. É por isso que antibiótico não resolve condiloma, e por isso que o cancro mole tem cura em dose única.</p></div>
+      <div class="card"><span class="n">Ideia 02</span><h3>O silêncio é o maior risco</h3><p>A maior parte das infecções por HPV não dá sintoma. Quem não sabe que tem, transmite sem querer.</p></div>
+      <div class="card"><span class="n">Ideia 03</span><h3>As duas são evitáveis</h3><p>Preservativo, vacina contra o HPV, testagem regular e tratamento das parcerias. Nenhuma dessas medidas depende de sorte.</p></div>
+    </div>
+    <div class="layer" style="--d:300;margin-top:24px">
+      <h3>Fontes</h3>
+      <p class="src">
+        <b>Brasil. Ministério da Saúde.</b> Protocolo Clínico e Diretrizes Terapêuticas para Atenção Integral às Pessoas com Infecções Sexualmente Transmissíveis (PCDT-IST).<br>
+        <b>Brasil. Ministério da Saúde.</b> Programa Nacional de Imunizações — Nota Informativa sobre a vacina HPV quadrivalente (esquema de dose única, 2024).<br>
+        <b>Organização Mundial da Saúde / OPAS.</b> Recomendações sobre esquema vacinal contra o HPV.<br>
+        <b>CONITEC / Ministério da Saúde.</b> Incorporação de podofilotoxina e imiquimode para verrugas anogenitais no SUS.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="rail">
+  <div class="dots" id="dots" role="tablist" aria-label="Navegar entre as cenas"></div>
+  <div class="nav">
+    <button class="btn" id="btnNotes" type="button" aria-pressed="false" title="Falas do apresentador (N)">Falas</button>
+    <button class="btn" id="btnPresenter" type="button" title="Abrir a janela do apresentador (P)">Apresentador</button>
+    <button class="btn" id="btnFull" type="button" title="Tela cheia (F)">Tela cheia</button>
+    <button class="btn" id="btnPrev" type="button" aria-label="Cena anterior">←</button>
+    <button class="btn" id="btnNext" type="button" aria-label="Próxima cena">→</button>
+  </div>
+</div>
+
+<div class="hint" id="hint">use as setas · espaço avança · N abre as falas</div>
+
+<aside class="notes" id="notes" aria-live="polite">
+  <span class="tag">Falas do apresentador · <span id="notesChapter">Abertura</span></span>
+  <div id="notesBody"></div>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- campo de partículas: cada partícula é um elemento próprio ---------- */
+  (function particles(){
+    var host = document.getElementById("particles");
+    if(!host) return;
+    var frag = document.createDocumentFragment();
+    var n = window.innerWidth < 560 ? 26 : 48;
+    for(var i=0;i<n;i++){
+      var p = document.createElement("span");
+      p.className = "particle";
+      var size = (Math.random()*3.4 + 1.1).toFixed(2);
+      p.style.setProperty("--x", (Math.random()*100).toFixed(2) + "%");
+      p.style.setProperty("--y", (Math.random()*100).toFixed(2) + "%");
+      p.style.setProperty("--s", size + "px");
+      p.style.setProperty("--o", (Math.random()*0.5 + 0.22).toFixed(2));
+      p.style.setProperty("--dx", (Math.random()*90 - 45).toFixed(0) + "px");
+      p.style.setProperty("--dy", (-Math.random()*130 - 30).toFixed(0) + "px");
+      p.style.setProperty("--dur", (Math.random()*18 + 14).toFixed(1) + "s");
+      p.style.setProperty("--delay", (-Math.random()*20).toFixed(1) + "s");
+      p.style.setProperty("--pc", Math.random() > 0.72 ? "#ff9db3" : "#ff1f4f");
+      frag.appendChild(p);
+    }
+    host.appendChild(frag);
+  })();
+
+  /* ---------- capsídeo icosaédrico em rotação (esfera de Fibonacci) ---------- */
+  function Capsid(canvas){
+    this.c = canvas; this.ctx = canvas.getContext("2d");
+    this.dim = parseFloat(canvas.dataset.dim || "1");
+    this.a = Math.random() * Math.PI;
+    this.N = 72;                       // 72 capsômeros da proteína L1
+    this.pts = [];
+    var golden = Math.PI * (3 - Math.sqrt(5));
+    for(var i=0;i<this.N;i++){
+      var y = 1 - (i / (this.N - 1)) * 2;
+      var r = Math.sqrt(Math.max(0, 1 - y*y));
+      var th = i * golden;
+      this.pts.push({x: Math.cos(th)*r, y: y, z: Math.sin(th)*r});
+    }
+    this.resize();
+  }
+  Capsid.prototype.resize = function(){
+    var rect = this.c.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.max(1, Math.round(rect.width));
+    var h = Math.max(1, Math.round(rect.height || rect.width));
+    this.c.width = w * dpr; this.c.height = h * dpr;
+    this.w = w; this.h = h; this.dpr = dpr;
+  };
+  Capsid.prototype.draw = function(){
+    var ctx = this.ctx, w = this.w, h = this.h, dpr = this.dpr;
+    if(!w || !h) return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    var cx = w/2, cy = h/2, R = Math.min(w,h) * 0.40, dim = this.dim;
+
+    // halo
+    var halo = ctx.createRadialGradient(cx,cy,R*0.55,cx,cy,R*1.75);
+    halo.addColorStop(0,"rgba(255,31,79,"+(0.30*dim)+")");
+    halo.addColorStop(0.55,"rgba(176,16,47,"+(0.11*dim)+")");
+    halo.addColorStop(1,"rgba(176,16,47,0)");
+    ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(cx,cy,R*1.75,0,6.2832); ctx.fill();
+
+    // corpo do capsídeo
+    var body = ctx.createRadialGradient(cx - R*0.32, cy - R*0.36, R*0.08, cx, cy, R*1.05);
+    body.addColorStop(0,"rgba(255,157,179,"+(0.52*dim)+")");
+    body.addColorStop(0.45,"rgba(176,16,47,"+(0.40*dim)+")");
+    body.addColorStop(1,"rgba(28,5,16,"+(0.88*dim)+")");
+    ctx.fillStyle = body; ctx.beginPath(); ctx.arc(cx,cy,R,0,6.2832); ctx.fill();
+
+    // capsômeros, do fundo para a frente
+    var a = this.a, ca = Math.cos(a), sa = Math.sin(a);
+    var proj = [];
+    for(var i=0;i<this.N;i++){
+      var p = this.pts[i];
+      var x =  p.x*ca + p.z*sa;
+      var z = -p.x*sa + p.z*ca;
+      proj.push({x:x, y:p.y, z:z});
+    }
+    proj.sort(function(u,v){ return u.z - v.z; });
+    for(var j=0;j<proj.length;j++){
+      var q = proj[j];
+      var d = (q.z + 1) / 2;                 // 0 fundo, 1 frente
+      var px = cx + q.x * R * 0.94;
+      var py = cy + q.y * R * 0.94;
+      var rad = R * (0.055 + 0.055 * d);
+      var alpha = (0.12 + 0.72 * d) * dim;
+      var g = ctx.createRadialGradient(px - rad*0.35, py - rad*0.4, rad*0.1, px, py, rad);
+      g.addColorStop(0,"rgba(255,214,224,"+alpha+")");
+      g.addColorStop(0.5,"rgba(255,31,79,"+(alpha*0.8)+")");
+      g.addColorStop(1,"rgba(109,10,30,"+(alpha*0.45)+")");
+      ctx.beginPath(); ctx.arc(px,py,rad,0,6.2832); ctx.fillStyle = g; ctx.fill();
+      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = "rgba(255,157,179,"+(alpha*0.5)+")";
+      ctx.stroke();
+    }
+
+    // aro de luz
+    ctx.beginPath(); ctx.arc(cx,cy,R*1.02,0,6.2832);
+    ctx.strokeStyle = "rgba(255,125,154,"+(0.42*dim)+")"; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,R*1.26,-0.9,1.5);
+    ctx.strokeStyle = "rgba(255,31,79,"+(0.32*dim)+")"; ctx.lineWidth = 1; ctx.stroke();
+  };
+
+  var capsids = [].map.call(document.querySelectorAll("[data-capsid]"), function(c){ return new Capsid(c); });
+  function renderCapsids(){ capsids.forEach(function(k){ k.draw(); }); }
+  window.addEventListener("resize", function(){ capsids.forEach(function(k){ k.resize(); }); renderCapsids(); });
+
+  if(reduce){
+    renderCapsids();
+  }else{
+    (function loop(){
+      capsids.forEach(function(k){
+        var vis = k.c.closest(".scene");
+        if(vis && vis.classList.contains("is-active")){ k.a += 0.0032; k.draw(); }
+      });
+      requestAnimationFrame(loop);
+    })();
+    // primeira pintura mesmo fora de cena ativa, para a página nunca aparecer vazia
+    renderCapsids();
+  }
+
+  /* ---------- navegação entre cenas ---------- */
+  var scenes = [].slice.call(document.querySelectorAll(".scene"));
+  var total = scenes.length;
+  var index = 0, busy = false, pending = null;
+  var hudNum = document.getElementById("hudNum");
+  var hudName = document.getElementById("hudName");
+  var hudScale = document.getElementById("hudScale");
+  var dotsHost = document.getElementById("dots");
+  var notes = document.getElementById("notes");
+  var notesBody = document.getElementById("notesBody");
+  var notesChapter = document.getElementById("notesChapter");
+  var hint = document.getElementById("hint");
+
+  scenes.forEach(function(s,i){
+    var b = document.createElement("button");
+    b.className = "dot" + (i === 0 ? " on" : "");
+    b.type = "button";
+    b.setAttribute("role","tab");
+    b.setAttribute("aria-label", "Cena " + (i+1) + ": " + (s.dataset.chapter || ""));
+    b.addEventListener("click", function(){ go(i); });
+    dotsHost.appendChild(b);
+  });
+  var dots = [].slice.call(dotsHost.children);
+
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+
+  function paintHud(){
+    var s = scenes[index];
+    hudNum.textContent = pad(index + 1);
+    hudName.textContent = s.dataset.chapter || "";
+    hudScale.textContent = s.dataset.scale || "—";
+    dots.forEach(function(d,i){ d.classList.toggle("on", i === index); });
+    notesChapter.textContent = s.dataset.chapter || "";
+    notesBody.innerHTML = "";
+    (s.dataset.notes || "").split("|").forEach(function(t){
+      if(!t.trim()) return;
+      var p = document.createElement("p");
+      p.textContent = t.trim();
+      notesBody.appendChild(p);
+    });
+    broadcast();
+  }
+
+  function go(next){
+    next = Math.max(0, Math.min(total - 1, next));
+    if(busy){ pending = next; return; }        // guarda o pedido em vez de descartar
+    if(next === index) return;
+    var fwd = next > index;
+    var out = scenes[index];
+    var into = scenes[next];
+    busy = true;
+    out.classList.remove("is-active");
+    out.classList.add(fwd ? "exit-fwd" : "exit-back");
+    into.classList.remove("exit-fwd","exit-back");
+    // força reflow para a transição de entrada reiniciar
+    void into.offsetWidth;
+    into.classList.add("is-active");
+    var inner = into.querySelector(".inner"); if(inner) inner.scrollTop = 0;
+    index = next;
+    paintHud();
+    setTimeout(function(){
+      out.classList.remove("exit-fwd","exit-back");
+      busy = false;
+      if(pending !== null){                    // atende quem apertou durante a transicao
+        var q = pending; pending = null;
+        if(q !== index){ go(q); }
+      }
+    }, reduce ? 20 : 900);
+    if(hint) hint.classList.add("gone");
+  }
+
+  /* ---------- canal com a janela do apresentador ----------
+     Duas janelas do mesmo navegador conversam pelo BroadcastChannel: a projetada
+     manda em que cena está, a do apresentador manda os comandos de avançar. */
+  var meta = scenes.map(function(s){
+    return {
+      chapter: s.dataset.chapter || "",
+      scale: s.dataset.scale || "",
+      time: parseInt(s.dataset.time || "60", 10),
+      notes: (s.dataset.notes || "").split("|").map(function(t){ return t.trim(); }).filter(Boolean)
+    };
+  });
+  var bc = null;
+  try{ if("BroadcastChannel" in window){ bc = new BroadcastChannel("ist-biologia"); } }catch(e){ bc = null; }
+  function broadcast(){
+    if(!bc) return;
+    try{ bc.postMessage({type:"state", i:index, total:total, meta:meta}); }catch(e){}
+  }
+  if(bc){
+    bc.onmessage = function(e){
+      var d = e.data || {};
+      if(d.type === "hello"){ broadcast(); }
+      else if(d.type === "cmd"){
+        if(d.go === "next"){ go(index + 1); }
+        else if(d.go === "prev"){ go(index - 1); }
+        else if(typeof d.go === "number"){ go(d.go); }
+      }
+    };
+  }
+  function openPresenter(){
+    var w = null;
+    try{ w = window.open("apresentador.html", "apresentadorIST", "width=1060,height=780"); }catch(e){ w = null; }
+    if(w){ broadcast(); }
+    else { toggleNotes(true); }   // sem permissão para abrir janela: usa o painel desta tela
+  }
+  var btnPresenter = document.getElementById("btnPresenter");
+  if(btnPresenter){ btnPresenter.addEventListener("click", openPresenter); }
+
+  function step(d){ go((pending !== null ? pending : index) + d); }
+
+  document.getElementById("btnNext").addEventListener("click", function(){ step(1); });
+  document.getElementById("btnPrev").addEventListener("click", function(){ step(-1); });
+
+  var btnNotes = document.getElementById("btnNotes");
+  function toggleNotes(force){
+    var open = typeof force === "boolean" ? force : !notes.classList.contains("open");
+    notes.classList.toggle("open", open);
+    btnNotes.classList.toggle("on", open);
+    btnNotes.setAttribute("aria-pressed", open ? "true" : "false");
+  }
+  btnNotes.addEventListener("click", function(){ toggleNotes(); });
+
+  document.getElementById("btnFull").addEventListener("click", function(){
+    try{
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else if(document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen(); }
+    }catch(e){ /* alguns navegadores recusam; segue sem tela cheia */ }
+  });
+
+  /* ---------- tela cheia: esconde o painel e deixa so as setas ---------- */
+  function syncFullscreen(){
+    var on = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    document.body.classList.toggle("fs", on);
+    if(on){
+      toggleNotes(false);           // a plateia nao pode ver as falas na tela projetada
+      if(hint){
+        hint.textContent = "Esc ou F para sair da tela cheia";
+        hint.classList.remove("gone");
+        clearTimeout(hint._t);
+        hint._t = setTimeout(function(){ hint.classList.add("gone"); }, 3200);
+      }
+    }
+  }
+  document.addEventListener("fullscreenchange", syncFullscreen);
+  document.addEventListener("webkitfullscreenchange", syncFullscreen);
+
+  document.addEventListener("keydown", function(e){
+    var k = e.key;
+    if(k === "ArrowRight" || k === "ArrowDown" || k === "PageDown" || k === " " || k === "Spacebar"){ e.preventDefault(); step(1); }
+    else if(k === "ArrowLeft" || k === "ArrowUp" || k === "PageUp"){ e.preventDefault(); step(-1); }
+    else if(k === "Home"){ e.preventDefault(); go(0); }
+    else if(k === "End"){ e.preventDefault(); go(total - 1); }
+    else if(k === "n" || k === "N"){ toggleNotes(); }
+    else if(k === "f" || k === "F"){ document.getElementById("btnFull").click(); }
+    else if(k === "p" || k === "P"){ openPresenter(); }
+    else if(k === "Escape"){ toggleNotes(false); }
+  });
+
+  // roda do mouse: só troca de cena quando o conteúdo já chegou ao fim
+  var lock = 0;
+  window.addEventListener("wheel", function(e){
+    if(notes.classList.contains("open")) return;
+    var inner = scenes[index].querySelector(".inner");
+    if(inner){
+      var canScroll = inner.scrollHeight - inner.clientHeight > 4;
+      if(canScroll){
+        var atTop = inner.scrollTop <= 1;
+        var atEnd = inner.scrollTop + inner.clientHeight >= inner.scrollHeight - 2;
+        if((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atTop)) return;
+      }
+    }
+    var now = Date.now();
+    if(now - lock < 820) return;
+    if(Math.abs(e.deltaY) < 12) return;
+    lock = now;
+    step(e.deltaY > 0 ? 1 : -1);
+  }, {passive:true});
+
+  // toque: arrastar para o lado troca de cena
+  var tx = 0, ty = 0;
+  window.addEventListener("touchstart", function(e){
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, {passive:true});
+  window.addEventListener("touchend", function(e){
+    if(!e.changedTouches || !e.changedTouches.length) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if(Math.abs(dx) > 62 && Math.abs(dx) > Math.abs(dy) * 1.5){ step(dx < 0 ? 1 : -1); }
+  }, {passive:true});
+
+  paintHud();
+  setTimeout(function(){ if(hint) hint.classList.add("gone"); }, 9000);
+
+  // mantém a cena atual se a página for republicada enquanto alguém assiste
+  try{
+    var hot = window.claude && window.claude.hot;
+    if(hot){
+      hot.snapshot && hot.snapshot(function(){ return {i: index}; });
+      var boot = function(data){ if(data && typeof data.i === "number" && data.i > 0) go(data.i); };
+      hot.ready ? hot.ready(boot) : boot(hot.data || {});
+    }
+  }catch(e){ /* fora do visualizador, segue normal */ }
+})();
+</script>
+
+</body>
+</html>
